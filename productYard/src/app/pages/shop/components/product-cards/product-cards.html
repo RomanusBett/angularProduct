@@ -1,0 +1,8 @@
+<div [id]="productItems()?.id" class="card">
+    <img [src]="productItems()?.image" class="card-img-top " [alt]="productItems()?.name">
+    <div class="card-body">
+        <p class="card-title product-bold-text">{{productItems()?.name}}</p>
+        <p class="card-text product-text">{{productItems()?.description}}</p>
+        <p class="product-price product-bold-text"><span>Ksh</span> {{productItems()?.price}}</p>
+    </div>
+</div>
