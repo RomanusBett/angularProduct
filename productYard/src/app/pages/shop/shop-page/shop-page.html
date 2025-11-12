@@ -1,5 +1,5 @@
 <div class="product-page-box">
-    <app-header></app-header>
+    <app-header (searchedField)="updateSearchTerm($event)" ></app-header>
     <div class="container mt-4 ">
         <div class="d-flex justify-content-center mb-3">
             <h4 class="our-products">Our Products</h4>
@@ -12,7 +12,7 @@
         </div>
         } @else {
         <div class="row g-4">
-            @for(product of products(); track product.id){
+            @for(product of filteredProducts(); track product.id){
             <div class="col-sm-6 col-md-4 col-lg-3">
                 <app-product-cards [productItems]="product"></app-product-cards>
             </div>

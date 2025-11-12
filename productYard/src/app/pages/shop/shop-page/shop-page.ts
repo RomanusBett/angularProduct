@@ -1,8 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component,signal, computed } from '@angular/core';
 import { Header } from '../../../shared/header/header';
 import { ProductCards } from '../components/product-cards/product-cards';
 import { yardProducts } from '../../../assets/data/products';
-import { signal } from '@angular/core';
 import { ProductItems } from '../components/product-cards/product-cards';
 
 @Component({
@@ -12,14 +11,24 @@ import { ProductItems } from '../components/product-cards/product-cards';
   styleUrl: './shop-page.css',
 })
 
-export class ShopPage implements OnInit{
+export class ShopPage{
   isLoading = signal(true);
   products = signal<ProductItems[]>([]);
+  searchTerm = signal('');
 
-  ngOnInit(): void {
-      setTimeout(()=>{
-        this.products.set(yardProducts);
-        this.isLoading.set(false);
-      }, 2000)
+  filteredProducts = computed(()=>{
+    const term = this.searchTerm().toLowerCase();
+    return this.products().filter(product=>product.name.toLowerCase().includes(term))
+  })
+
+  constructor (){
+    setTimeout(()=>{
+      this.products.set(yardProducts);
+      this.isLoading.set(false);
+    }, 2000)
+  }
+
+  updateSearchTerm(e:string){        
+    this.searchTerm.set(e);    
   }
 } 
