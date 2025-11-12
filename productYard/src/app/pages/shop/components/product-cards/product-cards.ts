@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { input } from '@angular/core';
 
-interface ProductItems {
+export interface ProductItems {
   id: number;
   name: string;
   price: number;
