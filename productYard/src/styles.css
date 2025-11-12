@@ -1,1 +1,10 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+    --primary: #4051b5;
+    --background-light: #f6f6f8;
+    --background-dark: #14161e;
+    --border-bottom-light: #eaebf1;
+    --text-dark: #111218;
+}
+body {
+  font-family: 'Work Sans', sans-serif;
+}

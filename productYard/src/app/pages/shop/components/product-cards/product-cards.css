@@ -1,0 +1,9 @@
+.product-bold-text{
+    font-weight: 700;
+}
+.product-price{
+    color: var(--primary);
+}
+.product-text{
+    font-size: .9rem;
+}
