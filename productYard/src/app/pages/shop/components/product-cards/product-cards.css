@@ -1,3 +1,6 @@
+.yard-product-card{
+    border: none;
+}
 .product-bold-text{
     font-weight: 700;
 }
@@ -6,4 +9,8 @@
 }
 .product-text{
     font-size: .9rem;
+}
+.yard-product-image{
+    height: 15rem;
+    object-fit: cover;
 }

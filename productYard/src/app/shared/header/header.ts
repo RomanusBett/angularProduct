@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, effect, output } from '@angular/core';
+import { signal } from '@angular/core';
 
 @Component({
   selector: 'app-header',
@@ -7,5 +8,12 @@ import { Component } from '@angular/core';
   styleUrl: './header.css',
 })
 export class Header {
+  searchedField = output<string>();
+  userSearch = signal('')
 
+  constructor(){
+    effect(()=>{
+      this.searchedField.emit(this.userSearch())      
+    })
+  }
 }
