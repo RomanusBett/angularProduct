@@ -1,13 +1,19 @@
-import { Component, signal } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { ShopPage } from './pages/shop/shop-page/shop-page';
+import { Header } from './pages/shop/components/header/header';
+import { ProductService } from './core/product-service';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, ShopPage],
+  imports: [RouterOutlet, Header, ShopPage],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
+
 export class App {
+  private prodServ = inject(ProductService)
+  inputSearch = computed(()=>this.prodServ.searchTerm())
+
   protected readonly title = signal('productYard');
 }
