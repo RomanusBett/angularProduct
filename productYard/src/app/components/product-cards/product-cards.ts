@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { input } from '@angular/core';
 import { YardCard } from '../yard-card/yard-card';
+import { RoundButton } from '../round-button/round-button';
+import { YardInput } from '../yard-input/yard-input';
 
 export interface ProductItems {
   id: number;
@@ -11,19 +13,18 @@ export interface ProductItems {
 }
 @Component({
   selector: 'app-product-cards',
-  imports: [YardCard],
+  imports: [YardCard, RoundButton, YardInput],
   templateUrl: './product-cards.html',
   styleUrl: './product-cards.css',
 })
 export class ProductCards {
   productItems = input<ProductItems>();
-  showModal = false;
+  showEditModal = false;
 
-  toggleModal() {
-    this.showModal = !this.showModal;
+  toggleEditModal=()=>{
+    this.showEditModal = !this.showEditModal;
   }
-  closeModal(){
-    this.showModal = false;
+  closeEditModal=()=>{
+    this.showEditModal = false;
   }
-
 }

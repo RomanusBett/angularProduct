@@ -1,6 +1,7 @@
 .product-page-box{
     background-color: var(--border-bottom-light);
-    min-height: 100vh;
+    min-height: calc(100vh - var(--header-height));
+    border-top: 1px solid rgb(202, 202, 202);
 }
 .our-products{
     font-weight: bolder;

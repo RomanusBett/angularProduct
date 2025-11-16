@@ -2,9 +2,6 @@
     background-color: var(--border-bottom-light);
     min-height: 100vh;
 }
-.checkout-radius{
-    border-radius: 2rem;
-}
 .checkout-mark-box p{
     margin: 0;
 }
@@ -29,8 +26,4 @@
 .product-child-el{
     margin-bottom: 0;
     max-width: 90%;
-}
-.checkout-btn{
-    background-color: var(--primary);
-    color: #fff;
 }
