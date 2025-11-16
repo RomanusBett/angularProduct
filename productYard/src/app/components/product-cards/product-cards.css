@@ -14,3 +14,13 @@
     height: 15rem;
     object-fit: cover;
 }
+
+.modal-backdrop-wrapper {
+  position: fixed;
+  inset: 0; 
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1050; 
+}

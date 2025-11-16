@@ -1,6 +1,6 @@
-import { ProductService } from './../../../core/product-service';
-import { Component, signal, computed, inject } from '@angular/core';
-import { ProductCards } from '../components/product-cards/product-cards';
+import { ProductService } from '../../core/product-service';
+import { Component, computed, inject } from '@angular/core';
+import { ProductCards } from '../../components/product-cards/product-cards';
 
 @Component({
   selector: 'app-shop-page',
