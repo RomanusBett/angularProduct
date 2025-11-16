@@ -1,12 +1,11 @@
 import { Component, computed, inject, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { ShopPage } from './pages/shop/shop-page/shop-page';
-import { Header } from './pages/shop/components/header/header';
+import { Header } from './shared/header/header';
 import { ProductService } from './core/product-service';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, Header, ShopPage],
+  imports: [RouterOutlet, Header],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })

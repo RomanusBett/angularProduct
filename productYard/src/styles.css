@@ -4,7 +4,13 @@
     --background-dark: #14161e;
     --border-bottom-light: #eaebf1;
     --text-dark: #111218;
+    --gray-200: #e5e7eb;
 }
 body {
   font-family: 'Work Sans', sans-serif;
+}
+
+.checkout-mark-box{
+    width: 1.5rem;
+    height: 1.5rem;
 }

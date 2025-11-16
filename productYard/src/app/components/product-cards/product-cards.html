@@ -1,0 +1,30 @@
+<div (click)="toggleModal()" data [id]="productItems()?.id" class="card yard-product-card">
+    <img [src]="productItems()?.image" class="card-img-top yard-product-image" [alt]="productItems()?.name">
+    <div class="card-body">
+        <p class="card-title product-bold-text">{{productItems()?.name}}</p>
+        <p class="card-text product-text">{{productItems()?.description}}</p>
+        <p class="product-price product-bold-text"><span>Ksh</span> {{productItems()?.price}}</p>
+    </div>
+</div>
+
+@if(showModal){
+<div class="modal-backdrop-wrapper" (click)="closeModal()">
+    <div class="modal fade show d-block" id="exampleModalCenter" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+                <app-yard-card>
+                    <div class="border-bottom">
+                        <h5>Edit product</h5>
+                    </div>
+                    <div>
+                        <div>
+                            <img [src]="productItems()?.image">
+                        </div>
+                    </div>
+                </app-yard-card>
+        </div>
+    </div>
+
+</div>
+
+}
