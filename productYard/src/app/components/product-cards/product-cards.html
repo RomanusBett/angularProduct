@@ -1,30 +1,59 @@
-<div (click)="toggleModal()" data [id]="productItems()?.id" class="card yard-product-card">
-    <img [src]="productItems()?.image" class="card-img-top yard-product-image" [alt]="productItems()?.name">
+<div data [id]="productItems()?.id" class="card yard-product-card">
+    <div class="product-image-container">
+        <img [src]="productItems()?.image" class="card-img-top yard-product-image" [alt]="productItems()?.name">
+        <div (click)="toggleEditModal()"  class="glass checkout-radius d-flex justify-content-center align-items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="black" class="bi bi-pencil"
+                viewBox="0 0 16 16">
+                <path
+                    d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325" />
+            </svg>
+        </div>
+    </div>
     <div class="card-body">
         <p class="card-title product-bold-text">{{productItems()?.name}}</p>
         <p class="card-text product-text">{{productItems()?.description}}</p>
         <p class="product-price product-bold-text"><span>Ksh</span> {{productItems()?.price}}</p>
+        <button class="btn checkout-btn checkout-radius">Add To Cart</button>
     </div>
 </div>
 
-@if(showModal){
-<div class="modal-backdrop-wrapper" (click)="closeModal()">
-    <div class="modal fade show d-block" id="exampleModalCenter" tabindex="-1" role="dialog"
-        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-                <app-yard-card>
-                    <div class="border-bottom">
-                        <h5>Edit product</h5>
-                    </div>
-                    <div>
-                        <div>
-                            <img [src]="productItems()?.image">
-                        </div>
-                    </div>
-                </app-yard-card>
+@if(showEditModal){
+<div class="modal-backdrop-wrapper" (click)="closeEditModal()">
+    <app-yard-card (click)="$event.stopPropagation()">
+        <div class="container border-bottom d-flex justify-content-between align-items-center">
+            <h5>Edit product</h5>
+            <app-round-button (click)="closeEditModal()" roundBtnText="X" alertType="secondary"></app-round-button>
         </div>
-    </div>
-
+        <div class="d-flex flex-column flex-md-row gap-4 mt-3">
+            <div class="">
+                <img class="yard-product-image product-desc-img rounded" [src]="productItems()?.image">
+            </div>
+            <div>
+                <form>
+                    <app-yard-input inputId="productName" [inputPlaceholder]="productItems()?.name" inputType="text"
+                        inputLabel="Product Name">
+                    </app-yard-input>
+                    <app-yard-input inputId="productPrice" [inputPlaceholder]="productItems()?.price" inputType="number"
+                        inputLabel="Price">
+                    </app-yard-input>
+                    <div class="form-group">
+                        <label for="productDescription" class="col-form-label col-form-label-sm">product
+                            description</label>
+                        <textarea class="form-control" id="productDescription yard-card-input" rows="3" [placeholder]="productItems()?.description"></textarea>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="mt-3 d-flex flex-column flex-md-row border-top py-2 justify-content-between">
+            <button class="btn btn-danger checkout-radius mb-2 mb-md-0">
+                delete product
+            </button>
+            <div class="d-flex gap-3 flex-column flex-md-row ">
+                <button (click)="closeEditModal()" type="button" class="btn btn-light checkout-radius">Cancel</button>
+                <button type="button" class="btn checkout-btn checkout-radius">Save Changes</button>
+            </div>
+        </div>
+    </app-yard-card>
 </div>
 
 }

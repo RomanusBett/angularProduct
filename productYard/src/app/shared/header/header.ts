@@ -1,7 +1,8 @@
-import { Component, effect, inject, output } from '@angular/core';
+import { Component, effect, inject } from '@angular/core';
 import { signal } from '@angular/core';
 import { ProductService } from '../../core/product-service';
 import { RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -13,6 +14,13 @@ export class Header {
   userSearch = signal('')
 
   private productService = inject(ProductService);
+  router = inject(Router);
+
+  menuOpen = false;
+
+  toggleMenuOpen(){
+    this.menuOpen = !this.menuOpen;
+  }
 
   constructor(){
     effect(()=>{

@@ -1,27 +1,40 @@
-<div class="border-bottom py-2 yard-header">
+<nav class="border-bottom py-2 yard-header d-flex align-items-center">
     <div class="container d-flex w-full justify-content-between align-items-center">
         <h5>Product<span class="yard-txt">Yard</span></h5>
-        <div class="d-flex d-none d-sm-block align-items-center text-center">
-            <p routerLink="home">Home</p>
-            <p routerLink="products">Shop</p>
+
+        <div class="hamburger hamburger d-md-none" (click)="toggleMenuOpen()">
+            <span></span>
+            <span></span>
+            <span></span>
         </div>
-        <div class="input-group product-search-input">
-            <div>
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart3"
-                    viewBox="0 0 16 16">
-                    <path
-                        d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l.84 4.479 9.144-.459L13.89 4zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2" />
-                </svg>
+
+        <div [class.active]="menuOpen" class="menu-items">
+            <div 
+                class="input-group product-search-input d-flex align-items-center">
+                @if(router.url==='/products'){
+                <div class="cart-btn-box header-heights d-flex align-items-center justify-content-center px-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="bi bi-cart3" viewBox="0 0 16 16">
+                        <path
+                            d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l.84 4.479 9.144-.459L13.89 4zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2" />
+                    </svg>
+                </div>
+                <input [value]="userSearch()" (input)="userSearch.set($event.target.value)" type="text"
+                    class="form-control header-heights header-search-input" placeholder="Search Product"
+                    aria-label="Input group example" aria-describedby="btnGroupAddon">
+                }
             </div>
-            <div class="input-group-text" id="btnGroupAddon">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search"
-                    viewBox="0 0 16 16">
-                    <path
-                        d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
-                </svg>
+
+            <div
+                class=" d-flex gap-3 align-items-center justify-content-center text-center">
+                @if(router.url==='/products'){
+                <a class="yard-header-links" routerLink="home">Home</a>
+
+                } @else {
+                <a class="yard-header-links" routerLink="products">Shop</a>
+
+                }
             </div>
-            <input [value]="userSearch()" (input)="userSearch.set($event.target.value)" type="text" class="form-control"
-                placeholder="Search Product" aria-label="Input group example" aria-describedby="btnGroupAddon">
         </div>
     </div>
-</div>
+</nav>
