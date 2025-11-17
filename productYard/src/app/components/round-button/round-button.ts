@@ -1,5 +1,4 @@
-import { Component, input } from '@angular/core';
-
+import { Component, input, output } from '@angular/core';
 
 @Component({
   selector: 'app-round-button',
@@ -8,6 +7,11 @@ import { Component, input } from '@angular/core';
   styleUrl: './round-button.css',
 })
 export class RoundButton {
-  roundBtnText = input<string>();
-  alertType = input<string|number>();
+  roundBtnText = input<string | number>();
+  alertType = input<string>();
+  buttonClicked = output();
+
+  onClick(){
+    this.buttonClicked.emit();
+  }
 }
