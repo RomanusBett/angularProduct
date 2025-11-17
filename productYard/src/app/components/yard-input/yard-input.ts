@@ -1,8 +1,9 @@
 import { Component, input } from '@angular/core';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-yard-input',
-  imports: [],
+  imports: [ReactiveFormsModule],
   templateUrl: './yard-input.html',
   styleUrl: './yard-input.css',
 })
@@ -11,4 +12,5 @@ export class YardInput {
   inputPlaceholder = input<string| number>();
   inputType = input<string>();
   inputLabel = input<string>();
+  formCtrl = input<FormControl>();
 } 

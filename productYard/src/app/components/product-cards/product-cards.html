@@ -1,7 +1,7 @@
 <div data [id]="productItems()?.id" class="card yard-product-card">
     <div class="product-image-container">
         <img [src]="productItems()?.image" class="card-img-top yard-product-image" [alt]="productItems()?.name">
-        <div (click)="toggleEditModal()" class="glass checkout-radius d-flex justify-content-center align-items-center">
+        <div (click)="toggleEditModal(productItems())" class="glass checkout-radius d-flex justify-content-center align-items-center">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="black" class="bi bi-pencil"
                 viewBox="0 0 16 16">
                 <path
@@ -33,29 +33,29 @@
                 <img class="yard-product-image product-desc-img rounded" [src]="productItems()?.image">
             </div>
             <div>
-                <form>
-                    <app-yard-input inputId="productName" [inputPlaceholder]="productItems()?.name" inputType="text"
+                <form [formGroup]="editProductForm">
+                    <app-yard-input inputId="productName" [formCtrl]="editProductForm.controls.name" [inputPlaceholder]="productItems()?.name" inputType="text"
                         inputLabel="Product Name">
                     </app-yard-input>
-                    <app-yard-input inputId="productPrice" [inputPlaceholder]="productItems()?.price" inputType="number"
+                    <app-yard-input inputId="productPrice" [formCtrl]="editProductForm.controls.price" [inputPlaceholder]="productItems()?.price" inputType="number"
                         inputLabel="Price">
                     </app-yard-input>
                     <div class="form-group">
                         <label for="productDescription" class="col-form-label col-form-label-sm">product
                             description</label>
-                        <textarea class="form-control" id="productDescription yard-card-input" rows="3"
+                        <textarea class="form-control" formControlName="description" id="productDescription" rows="3"
                             [placeholder]="productItems()?.description"></textarea>
                     </div>
                 </form>
             </div>
         </div>
         <div class="mt-3 d-flex flex-column flex-md-row border-top py-2 justify-content-between">
-            <button class="btn btn-danger checkout-radius mb-2 mb-md-0">
+            <button (click)="removeFromList(productItems()?.id!)" class="btn btn-danger checkout-radius mb-2 mb-md-0">
                 delete product
             </button>
             <div class="d-flex gap-3 flex-column flex-md-row ">
                 <button (click)="closeEditModal()" type="button" class="btn btn-light checkout-radius">Cancel</button>
-                <button type="button" class="btn checkout-btn checkout-radius">Save Changes</button>
+                <button (click)="editProduct(productItems()?.id!)" type="button" class="btn checkout-btn checkout-radius">Save Changes</button>
             </div>
         </div>
     </app-yard-card>

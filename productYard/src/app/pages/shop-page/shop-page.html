@@ -26,7 +26,6 @@
             </div>
             }
         </div>
-
         }
         @if(showCreateModal){
         <div class="modal-backdrop-wrapper" (click)="closeCreateModal()">
@@ -38,32 +37,31 @@
                 </div>
                 <div class="d-flex flex-column flex-md-row gap-4 mt-3">
                     <div>
-                        <form>
-                            <app-yard-input inputId="newProductName" inputPlaceholder="product name" inputType="text"
+                        <form [formGroup]="createProductForm">
+                            <app-yard-input [formCtrl]="createProductForm.controls.name" inputId="newProductName" inputPlaceholder="product name" inputType="text"
                                 inputLabel="Product Name">
                             </app-yard-input>
-                            <app-yard-input inputId="newProductPrice" inputPlaceholder="0" inputType="number"
+                            <app-yard-input [formCtrl]="createProductForm.controls.price" inputId="newProductPrice" inputPlaceholder="0" inputType="number"
                                 inputLabel="Price">
                             </app-yard-input>
-                            <app-yard-input inputId="newProductImage" inputPlaceholder="image url" inputType="text"
+                            <app-yard-input [formCtrl]="createProductForm.controls.image" inputId="newProductImage" inputPlaceholder="image url" inputType="text"
                                 inputLabel="Image url">
                             </app-yard-input>
                             <div class="form-group">
                                 <label for="productDescription" class="col-form-label col-form-label-sm">product
                                     description</label>
-                                <textarea class="form-control" id="newProductDescription yard-card-input"
-                                    rows="3"></textarea>
+                                <textarea formControlName="description" class="form-control" id="newProductDescription yard-card-input"
+                                    rows="4"></textarea>
                             </div>
                         </form>
                     </div>
                 </div>
                 <div class="mt-3 d-flex border-top py-2 justify-content-between gap-3">
                     <button (click)="closeCreateModal()" type="button" class="btn btn-light checkout-radius">Cancel</button>
-                    <button type="button" class="btn checkout-btn checkout-radius">Save Changes</button>
+                    <button (click)="logFormValue()" type="button" class="btn checkout-btn checkout-radius">Add Product</button>
                 </div>
             </app-yard-card>
         </div>
         }
-
     </div>
 </div>
