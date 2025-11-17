@@ -1,54 +1,67 @@
 <div class="checkout-big-box d-flex justify-content-center align-items-center">
     <div class="container d-flex justify-content-center">
-<app-yard-card>
-    <div class="card-body">
-        <div class="d-flex justify-content-between">
-            <div class="d-flex align-items-center">
-                <div
-                    class="container d-flex alert alert-success rounded-circle checkout-mark-box justify-content-center align-items-center">
-                    <p>✓</p>
-                </div>
-                <div class="container">
-                    <h3>Successfully added to cart</h3>
-                    <p>Your item is in the bag</p>
+        <app-yard-card>
+            <div class="card-body">
+                <div class="d-flex justify-content-between">
+                    @if(cartServ.cart().length !== 0){
+                    <div class="d-flex align-items-center">
+                        <div
+                            class="container d-flex alert alert-success rounded-circle checkout-mark-box justify-content-center align-items-center">
+                            <p>✓</p>
+                        </div>
+                        <div class="container">
+                            <h3>Successfully added to cart</h3>
+                            <p>Your items in the bag</p>
+                        </div>
+                    </div>
+                    } @else {
+                    <div class="d-flex align-items-center">
+                        <div
+                            class="container d-flex alert alert-danger rounded-circle checkout-mark-box justify-content-center align-items-center">
+                            <p>!</p>
+                        </div>
+                        <div class="container">
+                            <h3>No items in the cart</h3>
+                            <p>Your have no items in the bag</p>
+                        </div>
+                    </div>
+                    }
                 </div>
             </div>
-            <div class="d-flex justify-content-center align-items-center">
-                <app-round-button roundBtnText='x' alertType="secondary"></app-round-button>
-            </div>
-        </div>
-    </div>
-    <div class="border-bottom border-top cart-product-items container py-3">
-        @for(c of cartedProducts(); track c.id){
-        <div class="d-flex justify-content-between flex-column flex-lg-row">
-            <div class="d-flex gap-3 py-3">
-                <div class="">
-                    <img class="product-checkout-img rounded" [src]="c.image" [alt]="c.name">
-                </div>
-                <div class="">
-                    <div class="product-typography">
-                        <h5 class="product-child-el">{{c.name}}</h5>
-                        <p class="product-child-el product-checkout-price">Ksh {{c.price}}</p>
-                        <p class="product-child-el text-secondary">{{c.description}}</p>
+            @if(cartServ.cart().length !== 0){
+            <div class="border-bottom border-top cart-product-items container py-3">
+                @for(c of itemsInCart(); track c.id){
+                <div class="d-flex justify-content-between flex-column flex-lg-row">
+                    <div class="d-flex gap-3 py-3">
+                        <div class="">
+                            <img class="product-checkout-img rounded" [src]="c.image" [alt]="c.name">
+                        </div>
+                        <div class="">
+                            <div class="product-typography">
+                                <h5 class="product-child-el">{{c.name}}</h5>
+                                <p class="product-child-el product-checkout-price">Ksh {{c.price * c.quantity!}}</p>
+                                <p class="product-child-el text-secondary">{{c.description}}</p>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="d-flex gap-1">
+                        <app-round-button (buttonClicked)="decreaseItemQuantity(c.id)" roundBtnText='-' alertType="secondary"></app-round-button>
+                        <app-round-button [roundBtnText]='c.quantity!' alertType="light"></app-round-button>
+                        <app-round-button (buttonClicked)="addItem(c.id)" roundBtnText='+' alertType="secondary"></app-round-button>
                     </div>
                 </div>
-
+                }
             </div>
-            <div class="d-flex gap-1">
-                <app-round-button roundBtnText='-' alertType="secondary"></app-round-button>
-                <app-round-button roundBtnText='1' alertType="light"></app-round-button>
-                <app-round-button roundBtnText='+' alertType="secondary"></app-round-button>
+            
+            <div class="container border-bottom d-flex justify-content-between">
+                <p>Total</p>
+                <p>Ksh {{total().toFixed(2)}}</p>
             </div>
-        </div>
         }
+            <button routerLink="/products" class="btn checkout-btn checkout-radius mt-3">
+                Continue shopping
+            </button>
+        </app-yard-card>
     </div>
-    <div class="container border-bottom d-flex justify-content-between">
-        <p>Total</p>
-        <p>Ksh Amount</p>
-    </div>
-    <button routerLink="/products" class="btn checkout-btn checkout-radius mt-3">
-        Continue shopping
-    </button>
-</app-yard-card>
-</div>
 </div>

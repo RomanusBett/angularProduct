@@ -3,6 +3,7 @@ import { signal } from '@angular/core';
 import { ProductService } from '../../core/product-service';
 import { RouterLink } from '@angular/router';
 import { Router } from '@angular/router';
+import { CardService } from '../../core/card-service';
 
 @Component({
   selector: 'app-header',
@@ -14,6 +15,7 @@ export class Header {
   userSearch = signal('')
 
   private productService = inject(ProductService);
+  cardServ = inject(CardService)
   router = inject(Router);
 
   menuOpen = false;

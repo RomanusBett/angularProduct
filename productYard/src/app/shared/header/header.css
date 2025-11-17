@@ -7,6 +7,7 @@
 }
 .product-search-input {
   max-width: 40%;
+  font-weight: 600;
 }
 .yard-txt {
   color: var(--primary);
@@ -15,7 +16,7 @@
   cursor: pointer;
   text-decoration: none;
   color: #000;
-  font-weight: 700;
+  font-weight: 500;
 }
 .yard-header-links:hover {
   color: var(--primary);
@@ -52,6 +53,10 @@
   background: #000;
   margin: 4px 0;
   transition: 0.4s;
+}
+
+.yard-brand{
+    font-weight: bold;
 }
 
 @media (max-width: 768px) {

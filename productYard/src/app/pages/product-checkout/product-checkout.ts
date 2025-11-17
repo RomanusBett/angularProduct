@@ -3,6 +3,7 @@ import { ProductService } from '../../core/product-service';
 import { RoundButton } from '../../components/round-button/round-button';
 import { YardCard } from '../../components/yard-card/yard-card';
 import { RouterLink } from '@angular/router';
+import { CardService } from '../../core/card-service';
 
 @Component({
   selector: 'app-product-checkout',
@@ -10,7 +11,18 @@ import { RouterLink } from '@angular/router';
   templateUrl: './product-checkout.html',
   styleUrl: './product-checkout.css',
 })
+
 export class ProductCheckout {
   private prodServ = inject(ProductService);
-  cartedProducts = computed(()=>this.prodServ.allProducts().slice(0,2));
+  cartServ = inject(CardService);
+  itemsInCart = computed(()=>this.cartServ.cart());
+
+  total = computed(()=>this.itemsInCart().reduce((acc, item)=> (acc + (item.price * item.quantity!)), 0));
+
+  addItem(productid:number){
+    this.cartServ.addToCard(productid);
+  }
+  decreaseItemQuantity(productId: number){
+    this.cartServ.decreaseItemQuantity(productId);
+  }
 } 

@@ -1,7 +1,7 @@
 <div data [id]="productItems()?.id" class="card yard-product-card">
     <div class="product-image-container">
         <img [src]="productItems()?.image" class="card-img-top yard-product-image" [alt]="productItems()?.name">
-        <div (click)="toggleEditModal()"  class="glass checkout-radius d-flex justify-content-center align-items-center">
+        <div (click)="toggleEditModal()" class="glass checkout-radius d-flex justify-content-center align-items-center">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="black" class="bi bi-pencil"
                 viewBox="0 0 16 16">
                 <path
@@ -13,7 +13,11 @@
         <p class="card-title product-bold-text">{{productItems()?.name}}</p>
         <p class="card-text product-text">{{productItems()?.description}}</p>
         <p class="product-price product-bold-text"><span>Ksh</span> {{productItems()?.price}}</p>
-        <button class="btn checkout-btn checkout-radius">Add To Cart</button>
+        @if(cartServ.productInCart(productItems()?.id!)){
+            <button (click)="removeFromCart(productItems()?.id!)" class="btn checkout-btn checkout-radius">Remove From cart</button>
+        } @else {
+            <button (click)="addToCart(productItems()?.id!)" class="btn checkout-btn checkout-radius">Add To Cart</button>
+        }
     </div>
 </div>
 
@@ -39,7 +43,8 @@
                     <div class="form-group">
                         <label for="productDescription" class="col-form-label col-form-label-sm">product
                             description</label>
-                        <textarea class="form-control" id="productDescription yard-card-input" rows="3" [placeholder]="productItems()?.description"></textarea>
+                        <textarea class="form-control" id="productDescription yard-card-input" rows="3"
+                            [placeholder]="productItems()?.description"></textarea>
                     </div>
                 </form>
             </div>
