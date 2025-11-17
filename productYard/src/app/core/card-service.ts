@@ -40,5 +40,4 @@ export class CardService {
   removeFromCart(productId:number){
     this.cart.update(items=>items.filter(item=>item.id !== productId));
   }
-
 }

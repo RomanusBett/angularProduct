@@ -1,4 +1,4 @@
-export const yardProducts = [
+export let yardProducts = [
   {
     id: 1,
     name: 'Wireless Headphones',

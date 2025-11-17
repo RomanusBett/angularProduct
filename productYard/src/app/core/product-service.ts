@@ -27,7 +27,19 @@ export class ProductService {
     }, 2000);
   }
 
+  addProduct(product: ProductItems){
+    this.allProducts.update(items=>[...items, product])
+  }
+
   setSearchTerm(e:string){
     this.searchTerm.set(e);
+  }
+
+  editProductDetails(updated: ProductItems){
+    this.allProducts.update(items=>items.map(item=>item.id===updated.id ? {...item, ...updated}: item))
+  }
+
+  removeItemFromList(productId: number){
+    this.allProducts.update(items=>items.filter(item=>item.id !== productId))
   }
 }
