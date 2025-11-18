@@ -1,17 +1,17 @@
 import { ProductService } from '../../core/product-service';
-import { Component, computed, inject } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import { ProductCards } from '../../components/product-cards/product-cards';
 import { YardCard } from '../../components/yard-card/yard-card';
 import { YardInput } from '../../components/yard-input/yard-input';
 import { RoundButton } from '../../components/round-button/round-button';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-
+import { ToastService } from '../../core/toast-service';
 
 @Component({
   selector: 'app-shop-page',
   imports: [ProductCards, YardCard, YardInput, RoundButton, ReactiveFormsModule],
   templateUrl: './shop-page.html',
-  styleUrl: './shop-page.css',
+  styleUrl: './shop-page.scss',
 })
 
 export class ShopPage {
@@ -25,6 +25,8 @@ export class ShopPage {
   });
 
   private prodServ = inject(ProductService);
+  toastServ = inject(ToastService);
+  toasts = computed(()=>this.toastServ.toasts())
   products = computed(() => this.prodServ.allProducts());
   isLoading = computed(() => this.prodServ.isLoading());
   filtered = computed(() => this.prodServ.filteredProducts());
@@ -52,6 +54,7 @@ export class ShopPage {
       this.prodServ.addProduct(newProduct);
       this.createProductForm.reset();
       this.closeCreateModal();
+      this.toastServ.showToast('product successfully created', 'success');
     }
     else{
       alert('All fields are required')

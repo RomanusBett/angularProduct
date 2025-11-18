@@ -1,11 +1,12 @@
 import { CardService } from './../../core/card-service';
 import { ProductService } from '../../core/product-service';
-import { Component, inject } from '@angular/core';
+import { Component, inject, computed } from '@angular/core';
 import { input } from '@angular/core';
 import { YardCard } from '../yard-card/yard-card';
 import { RoundButton } from '../round-button/round-button';
 import { YardInput } from '../yard-input/yard-input';
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
+import { ToastService } from '../../core/toast-service';
 
 export interface ProductItems {
   id: number;
@@ -19,13 +20,13 @@ export interface ProductItems {
   selector: 'app-product-cards',
   imports: [YardCard, RoundButton, YardInput, ReactiveFormsModule],
   templateUrl: './product-cards.html',
-  styleUrl: './product-cards.css',
+  styleUrl: './product-cards.scss',
 })
 export class ProductCards {
-
   cartServ = inject(CardService);
   prodServ = inject(ProductService);
   productItems = input<ProductItems>();
+  toastServ = inject(ToastService);
   showEditModal = false;
 
   editProductForm = new FormGroup({
@@ -36,11 +37,13 @@ export class ProductCards {
   });
 
   addToCart(productId:number){
-    this.cartServ.addToCard(productId)
+    this.cartServ.addToCard(productId);
+    this.toastServ.showToast('item added to cart', 'success');
   }
 
   removeFromCart(productId:number){
     this.cartServ.removeFromCart(productId);
+    this.toastServ.showToast('item removed from cart', 'danger');
   }
 
   toggleEditModal=(product?: any)=>{
@@ -62,6 +65,7 @@ export class ProductCards {
   removeFromList(productId:number){    
     this.prodServ.removeItemFromList(productId);
     this.closeEditModal();
+    this.toastServ.showToast('item has been deleted', 'danger');
   }
 
   editProduct(productId:number){
@@ -76,5 +80,6 @@ export class ProductCards {
     } 
     this.prodServ.editProductDetails(updatedProduct);
     this.closeEditModal();
+    this.toastServ.showToast('item edited successfuly', 'danger');
   }
 }

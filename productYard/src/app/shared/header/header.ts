@@ -1,15 +1,13 @@
-import { Component, effect, inject } from '@angular/core';
-import { signal } from '@angular/core';
+import { Component, effect, inject, signal } from '@angular/core';
 import { ProductService } from '../../core/product-service';
-import { RouterLink } from '@angular/router';
-import { Router } from '@angular/router';
+import { RouterLink, Router } from '@angular/router';
 import { CardService } from '../../core/card-service';
 
 @Component({
   selector: 'app-header',
   imports: [RouterLink],
   templateUrl: './header.html',
-  styleUrl: './header.css',
+  styleUrl: './header.scss',
 })
 export class Header {
   userSearch = signal('')
