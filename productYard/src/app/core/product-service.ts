@@ -13,6 +13,7 @@ export class ProductService {
 
   filteredProducts = computed(()=>{
     const term = this.searchTerm().toLowerCase();
+    this.allProducts().sort((a,b)=>b.id-a.id);
     return this.allProducts().filter(product=>product.name.toLowerCase().includes(term))
   })
 

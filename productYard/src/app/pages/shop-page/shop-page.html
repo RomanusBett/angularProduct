@@ -1,6 +1,5 @@
 <div class="product-page-box">
     <div class="container py-4 position-relative">
-
         <div class="toast-wrapper position-fixed bottom-0 end-0 p-3">
             @for (toast of toasts(); track toast.id) {
             <div class="alert toast-item alert-{{toast.type}} mb-2">
@@ -18,8 +17,10 @@
                 Add Item
             </button>
         </div>
-        <div class="d-flex justify-content-center mb-3">
-            <h4 class="our-products">Our Products</h4>
+        <div class="mb-3 img-containers shop-discount-container d-flex align-items-center justify-content-center">
+            <div class="d-flex justify-content-center mb-3">
+                <h4 class="our-products">Available Products</h4>
+            </div>
         </div>
         @if(isLoading()){
         <div class="d-flex justify-content-center">
@@ -36,6 +37,27 @@
             }
         </div>
         }
+
+        <div class="d-flex justify-content-center mb-3 mt-5">
+            <h4 class="our-products">Sold out products</h4>
+        </div>
+        @if(isLoading()){
+        <div class="d-flex justify-content-center">
+            <div class="spinner-border" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
+        } @else {
+        <div class="row g-4">
+            @for(product of dummies(); track product.id){
+            <div class="col-sm-6 col-md-4 col-lg-3">
+                <app-product-cards [productItems]="product"></app-product-cards>
+            </div>
+            }
+        </div>
+        }
+
+
         @if(showCreateModal){
         <div class="modal-backdrop-wrapper" (click)="closeCreateModal()">
             <app-yard-card (click)="$event.stopPropagation()">

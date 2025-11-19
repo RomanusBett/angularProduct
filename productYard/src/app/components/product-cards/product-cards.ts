@@ -14,6 +14,7 @@ export interface ProductItems {
   price: number;
   description: string;
   image: string;
+  discounted?: boolean;
   quantity?: number;
 }
 @Component({
@@ -80,6 +81,6 @@ export class ProductCards {
     } 
     this.prodServ.editProductDetails(updatedProduct);
     this.closeEditModal();
-    this.toastServ.showToast('item edited successfuly', 'danger');
+    this.toastServ.showToast('item edited successfuly', 'success');
   }
 }
