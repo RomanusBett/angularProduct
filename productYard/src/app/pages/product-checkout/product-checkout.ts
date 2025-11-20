@@ -9,7 +9,7 @@ import { CardService } from '../../core/card-service';
   selector: 'app-product-checkout',
   imports: [RoundButton, YardCard, RouterLink],
   templateUrl: './product-checkout.html',
-  styleUrl: './product-checkout.css',
+  styleUrl: './product-checkout.scss',
 })
 
 export class ProductCheckout {

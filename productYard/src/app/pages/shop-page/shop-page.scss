@@ -1,0 +1,46 @@
+$border-color: rgb(202, 202, 202);
+
+.product-page-box {
+  background-color: var(--border-bottom-light);
+  min-height: calc(100vh - var(--header-height));
+  border-top: 1px solid $border-color;
+
+  .our-products {
+    font-weight: bolder;
+  }
+
+  .sale-img{
+    height: 7rem;
+    max-width: 100%;
+    object-fit: cover;
+  }
+
+  .toast-wrapper {
+    z-index: 100;
+
+    .toast-item {
+      min-width: 250px;
+      animation: slide-in 0.3s ease-out, fade-out 0.4s ease-in 2.6s forwards;
+    }
+  }
+}
+
+@keyframes slide-in {
+  from {
+    opacity: 0;
+    transform: translateX(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fade-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}

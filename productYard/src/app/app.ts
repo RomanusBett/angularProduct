@@ -7,12 +7,12 @@ import { ProductService } from './core/product-service';
   selector: 'app-root',
   imports: [RouterOutlet, Header],
   templateUrl: './app.html',
-  styleUrl: './app.css'
+  styleUrl: './app.scss'
 })
 
 export class App {
   private prodServ = inject(ProductService)
-  inputSearch = computed(()=>this.prodServ.searchTerm())
-
+  inputSearch = computed(()=>this.prodServ.searchTerm());
   protected readonly title = signal('productYard');
+  
 }

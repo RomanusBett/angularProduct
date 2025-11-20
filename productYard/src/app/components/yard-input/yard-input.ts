@@ -5,7 +5,7 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
   selector: 'app-yard-input',
   imports: [ReactiveFormsModule],
   templateUrl: './yard-input.html',
-  styleUrl: './yard-input.css',
+  styleUrl: './yard-input.scss',
 })
 export class YardInput {
   inputId = input<string>();
