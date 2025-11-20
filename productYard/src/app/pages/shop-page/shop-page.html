@@ -1,5 +1,13 @@
 <div class="product-page-box">
-    <div class="container py-4 ">
+    <div class="container py-4 position-relative">
+        <div class="toast-wrapper position-fixed bottom-0 end-0 p-3">
+            @for (toast of toasts(); track toast.id) {
+            <div class="alert toast-item alert-{{toast.type}} mb-2">
+                {{ toast.message }}
+            </div>
+            }
+        </div>
+
         <div class="border-bottom d-flex flex-column flex-md-row justify-content-between mb-4 pb-4">
             <div>
                 <h4 class="our-products">Add a new item</h4>
@@ -9,8 +17,10 @@
                 Add Item
             </button>
         </div>
-        <div class="d-flex justify-content-center mb-3">
-            <h4 class="our-products">Our Products</h4>
+        <div class="mb-3 img-containers shop-discount-container d-flex align-items-center justify-content-center">
+            <div class="d-flex justify-content-center mb-3">
+                <h4 class="our-products">Available Products</h4>
+            </div>
         </div>
         @if(isLoading()){
         <div class="d-flex justify-content-center">
@@ -27,6 +37,27 @@
             }
         </div>
         }
+
+        <div class="d-flex justify-content-center mb-3 mt-5">
+            <h4 class="our-products">Sold out products</h4>
+        </div>
+        @if(isLoading()){
+        <div class="d-flex justify-content-center">
+            <div class="spinner-border" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
+        } @else {
+        <div class="row g-4">
+            @for(product of dummies(); track product.id){
+            <div class="col-sm-6 col-md-4 col-lg-3">
+                <app-product-cards [productItems]="product"></app-product-cards>
+            </div>
+            }
+        </div>
+        }
+
+
         @if(showCreateModal){
         <div class="modal-backdrop-wrapper" (click)="closeCreateModal()">
             <app-yard-card (click)="$event.stopPropagation()">
@@ -38,27 +69,29 @@
                 <div class="d-flex flex-column flex-md-row gap-4 mt-3">
                     <div>
                         <form [formGroup]="createProductForm">
-                            <app-yard-input [formCtrl]="createProductForm.controls.name" inputId="newProductName" inputPlaceholder="product name" inputType="text"
-                                inputLabel="Product Name">
+                            <app-yard-input [formCtrl]="createProductForm.controls.name" inputId="newProductName"
+                                inputPlaceholder="product name" inputType="text" inputLabel="Product Name">
                             </app-yard-input>
-                            <app-yard-input [formCtrl]="createProductForm.controls.price" inputId="newProductPrice" inputPlaceholder="0" inputType="number"
-                                inputLabel="Price">
+                            <app-yard-input [formCtrl]="createProductForm.controls.price" inputId="newProductPrice"
+                                inputPlaceholder="0" inputType="number" inputLabel="Price">
                             </app-yard-input>
-                            <app-yard-input [formCtrl]="createProductForm.controls.image" inputId="newProductImage" inputPlaceholder="image url" inputType="text"
-                                inputLabel="Image url">
+                            <app-yard-input [formCtrl]="createProductForm.controls.image" inputId="newProductImage"
+                                inputPlaceholder="image url" inputType="text" inputLabel="Image url">
                             </app-yard-input>
                             <div class="form-group">
                                 <label for="productDescription" class="col-form-label col-form-label-sm">product
                                     description</label>
-                                <textarea formControlName="description" class="form-control" id="newProductDescription yard-card-input"
-                                    rows="4"></textarea>
+                                <textarea formControlName="description" class="form-control"
+                                    id="newProductDescription yard-card-input" rows="4"></textarea>
                             </div>
                         </form>
                     </div>
                 </div>
                 <div class="mt-3 d-flex border-top py-2 justify-content-between gap-3">
-                    <button (click)="closeCreateModal()" type="button" class="btn btn-light checkout-radius">Cancel</button>
-                    <button (click)="logFormValue()" type="button" class="btn checkout-btn checkout-radius">Add Product</button>
+                    <button (click)="closeCreateModal()" type="button"
+                        class="btn btn-light checkout-radius">Cancel</button>
+                    <button (click)="logFormValue()" type="button" class="btn checkout-btn checkout-radius">Add
+                        Product</button>
                 </div>
             </app-yard-card>
         </div>

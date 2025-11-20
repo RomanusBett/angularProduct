@@ -4,7 +4,7 @@ import { Component, input, output } from '@angular/core';
   selector: 'app-round-button',
   imports: [],
   templateUrl: './round-button.html',
-  styleUrl: './round-button.css',
+  styleUrl: './round-button.scss',
 })
 export class RoundButton {
   roundBtnText = input<string | number>();

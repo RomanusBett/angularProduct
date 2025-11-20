@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ProductCards } from './product-cards';
+import { provideZonelessChangeDetection } from '@angular/core';
 
 describe('ProductCards', () => {
   let component: ProductCards;
@@ -7,7 +8,8 @@ describe('ProductCards', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ProductCards]
+      imports: [ProductCards], 
+      providers: [provideZonelessChangeDetection()]
     })
     .compileComponents();
 
