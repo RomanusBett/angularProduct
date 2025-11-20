@@ -7,7 +7,7 @@ import { RoundButton } from '../../components/round-button/round-button';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ToastService } from '../../core/toast-service';
 import { CallService } from '../../core/call-service';
-import { Subscription, first } from 'rxjs';
+import { Subscription, first, take } from 'rxjs';
 
 @Component({
   selector: 'app-shop-page',
@@ -51,7 +51,7 @@ export class ShopPage implements OnDestroy {
   }
 
   fetchDummyData() {
-    this.dummyDataSubscription = this.callServ.fetchDummy().subscribe({
+    this.dummyDataSubscription = this.callServ.fetchDummy().pipe(take(1)).subscribe({
       next: (data) => {
         const productsArray = data.products;
         this.dummies.set(productsArray.map((item:any) => ({
