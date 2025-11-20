@@ -1,5 +1,5 @@
 import { ProductService } from '../../core/product-service';
-import { Component, computed, inject, signal } from '@angular/core';
+import { Component, computed, inject, OnDestroy, signal } from '@angular/core';
 import { ProductCards, ProductItems } from '../../components/product-cards/product-cards';
 import { YardCard } from '../../components/yard-card/yard-card';
 import { YardInput } from '../../components/yard-input/yard-input';
@@ -7,6 +7,7 @@ import { RoundButton } from '../../components/round-button/round-button';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ToastService } from '../../core/toast-service';
 import { CallService } from '../../core/call-service';
+import { Subscription, first } from 'rxjs';
 
 @Component({
   selector: 'app-shop-page',
@@ -15,13 +16,21 @@ import { CallService } from '../../core/call-service';
   styleUrl: './shop-page.scss',
 })
 
-export class ShopPage {
+export class ShopPage implements OnDestroy {
   constructor(){
     this.fetchDummyData()
   }
-
+  private prodServ = inject(ProductService);
+  private dummyDataSubscription: Subscription | undefined;
+  callServ = inject(CallService);
+  toastServ = inject(ToastService);
+  toasts = computed(() => this.toastServ.toasts())
+  products = computed(() => this.prodServ.allProducts());
+  isLoading = computed(() => this.prodServ.isLoading());
+  filtered = computed(() => this.prodServ.filteredProducts());
   errorMessage = "";
   dummies = signal<ProductItems[]>([]);
+  
 
   createProductForm = new FormGroup({
     name: new FormControl('', { nonNullable: true, validators: [Validators.required] }),
@@ -30,13 +39,7 @@ export class ShopPage {
     description: new FormControl('', { nonNullable: true, validators: [Validators.required] }),
   });
 
-  private prodServ = inject(ProductService);
-  callServ = inject(CallService);
-  toastServ = inject(ToastService);
-  toasts = computed(() => this.toastServ.toasts())
-  products = computed(() => this.prodServ.allProducts());
-  isLoading = computed(() => this.prodServ.isLoading());
-  filtered = computed(() => this.prodServ.filteredProducts());
+
 
   showCreateModal: boolean = false;
 
@@ -48,7 +51,7 @@ export class ShopPage {
   }
 
   fetchDummyData() {
-    this.callServ.fetchDummy().subscribe({
+    this.dummyDataSubscription = this.callServ.fetchDummy().subscribe({
       next: (data) => {
         const productsArray = data.products;
         this.dummies.set(productsArray.map((item:any) => ({
@@ -82,6 +85,12 @@ export class ShopPage {
     }
     else {
       alert('All fields are required')
+    }
+  }
+
+  ngOnDestroy(): void {
+    if(this.dummyDataSubscription){
+      this.dummyDataSubscription.unsubscribe()
     }
   }
 } 
