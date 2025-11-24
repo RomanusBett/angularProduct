@@ -4,7 +4,7 @@ import { Component } from '@angular/core';
   selector: 'app-yard-card',
   imports: [],
   templateUrl: './yard-card.html',
-  styleUrl: './yard-card.css',
+  styleUrl: './yard-card.scss',
 })
 export class YardCard {
 

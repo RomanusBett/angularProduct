@@ -47,6 +47,32 @@ body {
   justify-content: center;
 }
 
+.home-big-container{
+    background-image: url('https://cdn.pixabay.com/photo/2018/07/30/12/00/iphone-3572477_960_720.jpg');
+    min-height: calc(100vh - var(--header-height));
+}
+
+.shop-discount-container{
+  background-image: url('https://assets.boots.com/content/dam/boots/seasonal-campaigns/sale/sale-2024---2025/SALE_Hero_2024.dam.ts%3D1733145614909.jpg');
+  min-height: 5rem;
+  color: #e6e5ec;
+}
+
+.img-containers{
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    position: relative;
+    z-index: 1;
+}
+.img-containers::after{
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: -9;
+}
+
 @media (max-width: 768px) {
   .yard-card-input {
     min-width: fit-content;
