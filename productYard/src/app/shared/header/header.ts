@@ -1,7 +1,7 @@
 import { Component, effect, inject, signal, OnDestroy } from '@angular/core';
-import { ProductService } from '../../core/product-service';
 import { RouterLink, Router } from '@angular/router';
-import { CardService } from '../../core/card-service';
+import { CardService } from '../../core/services/card-service';
+import { ProductService } from '../../core/services/product-service';
 
 @Component({
   selector: 'app-header',

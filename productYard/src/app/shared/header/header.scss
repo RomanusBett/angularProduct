@@ -13,7 +13,6 @@
   color: var(--primary);
 }
 .yard-header-links {
-  cursor: pointer;
   text-decoration: none;
   color: #000;
   font-weight: 500;
@@ -39,7 +38,6 @@
   color: #fff;
   width: fit-content;
   margin-right: 1rem;
-  cursor: pointer;
   transition: transform 0.2s;
 }
 
@@ -58,7 +56,6 @@
 
 .hamburger {
   flex-direction: column;
-  cursor: pointer;
   display: none;
 }
 
@@ -78,7 +75,6 @@
 
 .yard-brand{
     font-weight: bold;
-    cursor: pointer;
 }
 
 @media (max-width: 768px) {

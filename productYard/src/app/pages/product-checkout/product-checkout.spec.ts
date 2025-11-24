@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideZonelessChangeDetection } from '@angular/core';
 import { ProductCheckout } from './product-checkout';
+import { provideRouter } from '@angular/router';
 
 describe('ProductCheckout', () => {
   let component: ProductCheckout;
@@ -9,7 +10,7 @@ describe('ProductCheckout', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [ProductCheckout],
-      providers: [provideZonelessChangeDetection()]
+      providers: [provideZonelessChangeDetection(), provideRouter([])]
     })
     .compileComponents();
 

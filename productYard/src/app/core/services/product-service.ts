@@ -1,7 +1,7 @@
-import { ProductItems } from '../components/product-cards/product-cards';
 import { computed, Injectable } from '@angular/core';
-import { yardProducts } from '../assets/data/products';
 import { signal } from '@angular/core';
+import { yardProducts } from '../../assets/data/products';
+import { ProductItems } from '../../components/product-cards/product-cards';
 
 @Injectable({
   providedIn: 'root',

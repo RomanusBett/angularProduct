@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { provideZonelessChangeDetection } from '@angular/core';
 import { YardCard } from './yard-card';
 
 describe('YardCard', () => {
@@ -8,7 +8,8 @@ describe('YardCard', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [YardCard]
+      imports: [YardCard],
+      providers: [provideZonelessChangeDetection()]
     })
     .compileComponents();
 

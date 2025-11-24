@@ -1,7 +1,4 @@
-.checkout-big-box{
-    background-color: var(--border-bottom-light);
-    min-height: calc(100vh - var(--header-height));
-}
+
 .checkout-mark-box p{
     margin: 0;
 }

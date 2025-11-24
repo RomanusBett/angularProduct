@@ -1,8 +1,8 @@
-<nav class="border-bottom py-2 yard-header d-flex align-items-center">
+<nav class="border-bottom py-2 yard-header class-pointer d-flex align-items-center">
     <div class="container d-flex w-full justify-content-between align-items-center">
-        <h5 class="yard-brand" routerLink="home">Product<span class="yard-txt">Yard</span></h5>
+        <h5 class="yard-brand class-pointer" routerLink="home">Product<span class="yard-txt">Yard</span></h5>
         @if(router.url==='/products'){
-        <div class="hamburger hamburger d-md-none" (click)="toggleMenuOpen()">
+        <div class="hamburger class-pointer hamburger d-md-none" (click)="toggleMenuOpen()">
             <span></span>
             <span></span>
             <span></span>
@@ -10,7 +10,7 @@
         }
         @if(router.url!=='/products'){
         <div class="d-flex gap-3 align-items-center text-center">
-            <a class="yard-header-links" routerLink="products">Shop</a>
+            <a class="yard-header-links class-pointer" routerLink="products">Shop</a>
         </div>
         }
         @if(router.url==='/products'){
@@ -20,7 +20,7 @@
                     class="form-control header-heights header-search-input rounded" placeholder="Search Product"
                     aria-label="Input group example" aria-describedby="btnGroupAddon">
                 <div routerLink="/product/checkout"
-                    class="cart-btn-box header-heights d-flex align-items-center justify-content-center px-2 text-center gap-2 rounded" [class.wiggle]="wiggleCart()">
+                    class="cart-btn-box class-pointer header-heights d-flex align-items-center justify-content-center px-2 text-center gap-2 rounded" [class.wiggle]="wiggleCart()">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="white"
                         class="bi bi-cart-fill" viewBox="0 0 16 16">
                         <path

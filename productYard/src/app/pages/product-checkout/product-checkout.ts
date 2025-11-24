@@ -1,9 +1,9 @@
 import { Component, inject, computed } from '@angular/core';
-import { ProductService } from '../../core/product-service';
 import { RoundButton } from '../../components/round-button/round-button';
 import { YardCard } from '../../components/yard-card/yard-card';
 import { RouterLink } from '@angular/router';
-import { CardService } from '../../core/card-service';
+import { CardService } from '../../core/services/card-service';
+import { ProductService } from '../../core/services/product-service';
 
 @Component({
   selector: 'app-product-checkout',

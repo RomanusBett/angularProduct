@@ -1,24 +1,23 @@
-import { ProductService } from '../../core/product-service';
-import { Component, computed, inject, OnDestroy, signal } from '@angular/core';
+import { Component, computed, inject, OnDestroy, OnInit, signal } from '@angular/core';
 import { ProductCards, ProductItems } from '../../components/product-cards/product-cards';
 import { YardCard } from '../../components/yard-card/yard-card';
-import { YardInput } from '../../components/yard-input/yard-input';
 import { RoundButton } from '../../components/round-button/round-button';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ToastService } from '../../core/toast-service';
-import { CallService } from '../../core/call-service';
-import { Subscription, first, take } from 'rxjs';
+import { ToastService } from '../../core/services/toast-service';
+import { CallService } from '../../core/services/call-service';
+import { Subscription, take } from 'rxjs';
+import { ProductService } from '../../core/services/product-service';
 
 @Component({
   selector: 'app-shop-page',
-  imports: [ProductCards, YardCard, YardInput, RoundButton, ReactiveFormsModule],
+  imports: [ProductCards, YardCard, RoundButton, ReactiveFormsModule],
   templateUrl: './shop-page.html',
   styleUrl: './shop-page.scss',
 })
 
-export class ShopPage implements OnDestroy {
-  constructor(){
-    this.fetchDummyData()
+export class ShopPage implements OnInit, OnDestroy {
+  ngOnInit(): void {
+      this.fetchDummyData()
   }
   private prodServ = inject(ProductService);
   private dummyDataSubscription: Subscription | undefined;
@@ -39,13 +38,12 @@ export class ShopPage implements OnDestroy {
     description: new FormControl('', { nonNullable: true, validators: [Validators.required] }),
   });
 
-
-
   showCreateModal: boolean = false;
 
   toggleCreateModal = () => {
     this.showCreateModal = !this.showCreateModal;
   }
+
   closeCreateModal = () => {
     this.showCreateModal = false;
   }

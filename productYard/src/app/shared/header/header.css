@@ -9,11 +9,8 @@
   max-width: 40%;
   font-weight: 600;
 }
-.yard-txt {
-  color: var(--primary);
-}
+
 .yard-header-links {
-  cursor: pointer;
   text-decoration: none;
   color: #000;
   font-weight: 500;

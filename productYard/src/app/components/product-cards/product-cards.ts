@@ -1,12 +1,11 @@
-import { CardService } from './../../core/card-service';
-import { ProductService } from '../../core/product-service';
-import { Component, inject, computed } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { input } from '@angular/core';
 import { YardCard } from '../yard-card/yard-card';
 import { RoundButton } from '../round-button/round-button';
-import { YardInput } from '../yard-input/yard-input';
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
-import { ToastService } from '../../core/toast-service';
+import { ToastService } from '../../core/services/toast-service';
+import { ProductService } from '../../core/services/product-service';
+import { CardService } from '../../core/services/card-service';
 
 export interface ProductItems {
   id: number;
@@ -19,7 +18,7 @@ export interface ProductItems {
 }
 @Component({
   selector: 'app-product-cards',
-  imports: [YardCard, RoundButton, YardInput, ReactiveFormsModule],
+  imports: [YardCard, RoundButton, ReactiveFormsModule],
   templateUrl: './product-cards.html',
   styleUrl: './product-cards.scss',
 })

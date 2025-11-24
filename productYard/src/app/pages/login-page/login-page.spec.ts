@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { YardInput } from './yard-input';
+import { LoginPage } from './login-page';
 
-describe('YardInput', () => {
-  let component: YardInput;
-  let fixture: ComponentFixture<YardInput>;
+describe('LoginPage', () => {
+  let component: LoginPage;
+  let fixture: ComponentFixture<LoginPage>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [YardInput]
+      imports: [LoginPage]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(YardInput);
+    fixture = TestBed.createComponent(LoginPage);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -11,6 +11,15 @@ body {
   font-family: 'Work Sans', sans-serif;
 }
 
+.checkout-big-box{
+    background-color: var(--border-bottom-light);
+    min-height: calc(100vh - var(--header-height));
+}
+
+.yard-txt {
+  color: var(--primary);
+}
+
 .checkout-mark-box {
   width: 1.5rem;
   height: 1.5rem;
@@ -28,8 +37,11 @@ body {
 .checkout-btn {
   background-color: var(--primary);
   color: #fff;
-  cursor: pointer;
   height: fit-content;
+}
+
+.class-pointer{
+  cursor: pointer;
 }
 
 .checkout-btn:hover {
@@ -72,6 +84,8 @@ body {
     background: rgba(0, 0, 0, 0.5);
     z-index: -9;
 }
+
+
 
 @media (max-width: 768px) {
   .yard-card-input {
