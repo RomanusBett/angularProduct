@@ -1,0 +1,67 @@
+<app-header>
+    <div class="hamburger hamburger d-md-none" (click)="prodServ.toggleHamburger()">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+
+    <div [class.active]="prodServ.hamburgerOpen" class="menu-items justify-content-end">
+        <div class="input-group product-search-input yard-txt d-flex align-items-center gap-2">
+            <input [value]="userSearch()" (input)="userSearch.set($event.target.value)" type="text"
+                class="form-control header-heights header-search-input rounded" placeholder="Search Product"
+                aria-label="Input group example" aria-describedby="btnGroupAddon">
+            <div routerLink="/product/checkout"
+                class="cart-btn-box class-pointer header-heights d-flex align-items-center justify-content-center px-2 text-center gap-2 rounded"
+                [class.wiggle]="wiggleCart()">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="white" class="bi bi-cart-fill"
+                    viewBox="0 0 16 16">
+                    <path
+                        d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2" />
+                </svg>
+                @if(cardServ.cart().length!==0){
+                {{cardServ.cart().length}}
+                }
+            </div>
+            <button (click)="logoutUser()" class="btn btn-light px-2 rounded"><svg xmlns="http://www.w3.org/2000/svg"
+                    width="20" height="20" fill="currentColor" class="bi bi-box-arrow-right " viewBox="0 0 16 16">
+                    <path fill-rule="evenodd"
+                        d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0z" />
+                    <path fill-rule="evenodd"
+                        d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708z" />
+                </svg>
+            </button>
+        </div>
+    </div>
+</app-header>
+
+<div class="product-page-box">
+    <div class="container py-4 position-relative">
+        <div class="toast-wrapper position-fixed bottom-0 end-0 p-3">
+            @for (toast of toasts(); track toast.id) {
+            <div class="alert toast-item alert-{{toast.type}} mb-2">
+                {{ toast.message }}
+            </div>
+            }
+        </div>
+        <div class="mb-3 img-containers shop-discount-container d-flex align-items-center justify-content-center">
+            <div class="d-flex justify-content-center mb-3">
+                <h4 class="our-products">Available Products</h4>
+            </div>
+        </div>
+        @if(isLoading()){
+        <div class="d-flex justify-content-center">
+            <div class="spinner-border" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
+        } @else {
+        <div class="row g-4">
+            @for(product of filtered(); track product.id){
+            <div class="col-sm-6 col-md-4 col-lg-3">
+                <app-product-cards role="user" [productItems]="product"></app-product-cards>
+            </div>
+            }
+        </div>
+        }
+    </div>
+</div>

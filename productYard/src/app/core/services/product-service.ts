@@ -10,6 +10,7 @@ export class ProductService {
   allProducts = signal<ProductItems[]>([]);
   isLoading = signal(true);
   searchTerm = signal('');
+  hamburgerOpen = false;
 
   filteredProducts = computed(()=>{
     const term = this.searchTerm().toLowerCase();
@@ -19,6 +20,10 @@ export class ProductService {
 
   constructor() {
     this.loadProducts();  
+  }
+
+  toggleHamburger() {
+    this.hamburgerOpen = !this.hamburgerOpen;
   }
 
   loadProducts = ()=>{

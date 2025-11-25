@@ -4,10 +4,11 @@ import { YardCard } from '../../components/yard-card/yard-card';
 import { RouterLink } from '@angular/router';
 import { CardService } from '../../core/services/card-service';
 import { ProductService } from '../../core/services/product-service';
+import { Header } from '../../shared/header/header';
 
 @Component({
   selector: 'app-product-checkout',
-  imports: [RoundButton, YardCard, RouterLink],
+  imports: [RoundButton, YardCard, RouterLink, Header],
   templateUrl: './product-checkout.html',
   styleUrl: './product-checkout.scss',
 })

@@ -1,3 +1,18 @@
+<app-header>
+    <div class="hamburger class-pointer hamburger d-md-none" (click)="prodServ.toggleHamburger()">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+    <button (click)="logoutUser()" class="btn btn-light px-2 rounded"><svg xmlns="http://www.w3.org/2000/svg" width="20"
+            height="20" fill="currentColor" class="bi bi-box-arrow-right " viewBox="0 0 16 16">
+            <path fill-rule="evenodd"
+                d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0z" />
+            <path fill-rule="evenodd"
+                d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708z" />
+        </svg></button>
+</app-header>
+
 <div class="product-page-box">
     <div class="container py-4 position-relative">
         <div class="toast-wrapper position-fixed bottom-0 end-0 p-3">
@@ -32,7 +47,7 @@
         <div class="row g-4">
             @for(product of filtered(); track product.id){
             <div class="col-sm-6 col-md-4 col-lg-3">
-                <app-product-cards [productItems]="product"></app-product-cards>
+                <app-product-cards role="admin" [productItems]="product"></app-product-cards>
             </div>
             }
         </div>
@@ -69,22 +84,20 @@
                     <div>
                         <form [formGroup]="createProductForm">
                             <div class="form-group d-flex flex-column">
-                                <label class="col-form-label col-form-label-sm"
-                                    for="newProductName">Product Name</label>
-                                <input type="text" class="form-control-sm rounded yard-card-input"
-                                    id="newProductName" formControlName="name" placeholder="Product name">
+                                <label class="col-form-label col-form-label-sm" for="newProductName">Product
+                                    Name</label>
+                                <input type="text" class="form-control-sm rounded yard-card-input" id="newProductName"
+                                    formControlName="name" placeholder="Product name">
                             </div>
                             <div class="form-group d-flex flex-column">
-                                <label class="col-form-label col-form-label-sm"
-                                    for="newProductPrice">Price</label>
+                                <label class="col-form-label col-form-label-sm" for="newProductPrice">Price</label>
                                 <input type="number" class="form-control-sm rounded yard-card-input"
                                     id="newProductPrice" formControlName="price" placeholder="0">
                             </div>
                             <div class="form-group d-flex flex-column">
-                                <label class="col-form-label col-form-label-sm"
-                                    for="newProductImage">Image url</label>
-                                <input type="text" class="form-control-sm rounded yard-card-input"
-                                    id="newProductImage" formControlName="image" placeholder="image url">
+                                <label class="col-form-label col-form-label-sm" for="newProductImage">Image url</label>
+                                <input type="text" class="form-control-sm rounded yard-card-input" id="newProductImage"
+                                    formControlName="image" placeholder="image url">
                             </div>
                             <div class="form-group">
                                 <label for="productDescription" class="col-form-label col-form-label-sm">product
@@ -98,7 +111,8 @@
                 <div class="mt-3 d-flex border-top py-2 justify-content-between gap-3">
                     <button (click)="closeCreateModal()" type="button"
                         class="btn btn-light checkout-radius">Cancel</button>
-                    <button (click)="logFormValue()" type="button" class="btn checkout-btn class-pointer checkout-radius">Add
+                    <button (click)="createNewProduct()" type="button"
+                        class="btn checkout-btn class-pointer checkout-radius">Add
                         Product</button>
                 </div>
             </app-yard-card>

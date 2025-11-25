@@ -1,4 +1,9 @@
-<div class="checkout-big-box d-flex justify-content-center align-items-center">
+<app-header>
+    <div class="d-flex gap-3 align-items-center text-center">
+        <a class="yard-header-links class-pointer" routerLink="/products">Shop</a>
+    </div>
+</app-header>
+<div class="home-big-container grey-background d-flex justify-content-center align-items-center">
     <div class="container d-flex justify-content-center">
         <app-yard-card>
             <div class="card-body">
@@ -46,19 +51,21 @@
 
                     </div>
                     <div class="d-flex gap-1">
-                        <app-round-button (buttonClicked)="decreaseItemQuantity(c.id)" roundBtnText='-' alertType="secondary"></app-round-button>
+                        <app-round-button (buttonClicked)="decreaseItemQuantity(c.id)" roundBtnText='-'
+                            alertType="secondary"></app-round-button>
                         <app-round-button [roundBtnText]='c.quantity!' alertType="light"></app-round-button>
-                        <app-round-button (buttonClicked)="addItem(c.id)" roundBtnText='+' alertType="secondary"></app-round-button>
+                        <app-round-button (buttonClicked)="addItem(c.id)" roundBtnText='+'
+                            alertType="secondary"></app-round-button>
                     </div>
                 </div>
                 }
             </div>
-            
+
             <div class="container border-bottom d-flex justify-content-between">
                 <p>Total</p>
                 <p>Ksh {{total().toFixed(2)}}</p>
             </div>
-        }
+            }
             <button routerLink="/products" class="btn checkout-btn class-pointer checkout-radius mt-3">
                 Continue shopping
             </button>

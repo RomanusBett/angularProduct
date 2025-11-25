@@ -11,9 +11,20 @@ body {
   font-family: 'Work Sans', sans-serif;
 }
 
-.checkout-big-box{
-    background-color: var(--border-bottom-light);
-    min-height: calc(100vh - var(--header-height));
+.home-big-container {
+  min-height: calc(100vh - var(--header-height));
+}
+
+.grey-background {
+  background-color: var(--border-bottom-light);
+}
+
+.toast-wrapper {
+  z-index: 3;
+  .toast-item {
+    min-width: 250px;
+    animation: slide-in 0.3s ease-out, fade-out 0.4s ease-in 2.6s forwards;
+  }
 }
 
 .yard-txt {
@@ -40,7 +51,7 @@ body {
   height: fit-content;
 }
 
-.class-pointer{
+.class-pointer {
   cursor: pointer;
 }
 
@@ -55,40 +66,164 @@ body {
   background: rgba(0, 0, 0, 0.7);
   display: flex;
   align-items: center;
-  z-index: 1050;
+  z-index: 2;
   justify-content: center;
 }
 
-.home-big-container{
-    background-image: url('https://cdn.pixabay.com/photo/2018/07/30/12/00/iphone-3572477_960_720.jpg');
-    min-height: calc(100vh - var(--header-height));
-}
-
-.shop-discount-container{
-  background-image: url('https://assets.boots.com/content/dam/boots/seasonal-campaigns/sale/sale-2024---2025/SALE_Hero_2024.dam.ts%3D1733145614909.jpg');
+.shop-discount-container {
   min-height: 5rem;
   color: #e6e5ec;
 }
 
-.img-containers{
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
-    position: relative;
-    z-index: 1;
+.img-containers {
+  background-image: url('./app/assets/home-image.jpeg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  position: relative;
+  z-index: 0;
 }
-.img-containers::after{
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.5);
-    z-index: -9;
+.img-containers::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: -1;
 }
 
+.auth-form-card {
+  width: 50%;
+}
 
+.product-page-box {
+  background-color: var(--border-bottom-light);
+  min-height: calc(100vh - var(--header-height));
+  border-top: 1px solid rgb(202, 202, 202);
+}
+.our-products {
+  font-weight: bolder;
+}
+
+.yard-header {
+  background-color: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+.product-search-input {
+  max-width: 40%;
+  font-weight: 600;
+}
+
+.yard-header-links {
+  text-decoration: none;
+  color: #000;
+  font-weight: 500;
+}
+.yard-header-links:hover {
+  color: var(--primary);
+}
+
+@keyframes wiggle {
+  0%,
+  100% {
+    transform: rotate(0deg);
+    background-color: var(--primary);
+  }
+  25% {
+    transform: rotate(-10deg);
+    background-color: #0057fa;
+  }
+  50% {
+    transform: rotate(0deg);
+  }
+  75% {
+    transform: rotate(5deg);
+    background-color: #0057fa;
+  }
+}
+
+.cart-btn-box {
+  background-color: var(--primary);
+  color: #fff;
+  width: fit-content;
+  margin-right: 1rem;
+  transition: transform 0.2s;
+}
+
+.cart-btn-box.wiggle {
+  animation: wiggle 0.5s ease-in-out 0s 1;
+}
+
+.header-heights {
+  height: 2rem;
+}
+.header-search-input {
+  border: 1px solid var(--primary);
+  background-color: rgb(241, 241, 241);
+}
+
+.hamburger {
+  flex-direction: column;
+  cursor: pointer;
+  display: none;
+}
+
+.menu-items {
+  width: 70%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.hamburger span {
+  height: 3px;
+  width: 25px;
+  background: #000;
+  margin: 4px 0;
+  transition: 0.4s;
+}
+
+.yard-brand {
+  font-weight: bold;
+}
+
+// mixins in angular
+
+@media (max-width: 998px) {
+  .auth-form-card {
+    width: 100%;
+  }
+}
 
 @media (max-width: 768px) {
   .yard-card-input {
     min-width: fit-content;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+
+  .menu-items {
+    position: absolute;
+    top: 60px;
+    left: -100%;
+    flex-direction: column;
+    width: 100%;
+    background: #fff;
+    padding: 1rem 0;
+    transition: 0.3s;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 1;
+    border-top: 1px solid gray;
+  }
+  .product-search-input {
+    max-width: 85%;
+    margin-bottom: 1rem;
+  }
+
+  .menu-items.active {
+    left: 0;
   }
 }

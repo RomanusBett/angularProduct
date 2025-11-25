@@ -1,7 +1,7 @@
 <div data [id]="productItems()?.id" class="card yard-product-card">
     <div class="product-image-container">
         <img [src]="productItems()?.image" class="card-img-top yard-product-image" [alt]="productItems()?.name">
-        @if(!productItems()?.discounted){
+        @if (role() === 'admin' && !productItems()?.stockedOut){
         <div (click)="toggleEditModal(productItems())"
             class="glass checkout-radius d-flex justify-content-center align-items-center">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="black" class="bi bi-pencil"
@@ -17,8 +17,8 @@
         <p class="card-title product-bold-text">{{productItems()?.name}}</p>
         <p class="card-text product-text">{{productItems()?.description}}</p>
         <p class="product-price product-bold-text"><span>Ksh</span> {{productItems()?.price}}</p>
-        @if(!productItems()?.discounted){
-        @if(cartServ.productInCart(productItems()?.id!)){
+        @if (role() === 'user' && !productItems()?.stockedOut){
+        @if (cartServ.productInCart(productItems()?.id!)){
         <button (click)="removeFromCart(productItems()?.id!)" class="btn checkout-btn class-pointer checkout-radius">Remove From
             cart</button>
         } @else {
@@ -28,7 +28,8 @@
     </div>
 </div>
 
-@if(showEditModal){
+
+@if (role()==='admin' && showEditModal){
 <div class="modal-backdrop-wrapper" (click)="closeEditModal()">
     <app-yard-card (click)="$event.stopPropagation()">
         <div class="container border-bottom d-flex justify-content-between align-items-center">

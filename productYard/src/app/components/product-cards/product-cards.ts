@@ -13,7 +13,7 @@ export interface ProductItems {
   price: number;
   description: string;
   image: string;
-  discounted?: boolean;
+  stockedOut?: boolean;
   quantity?: number;
 }
 @Component({
@@ -27,6 +27,7 @@ export class ProductCards {
   prodServ = inject(ProductService);
   productItems = input<ProductItems>();
   toastServ = inject(ToastService);
+  role = input<string>()
   showEditModal = false;
 
   editProductForm = new FormGroup({
