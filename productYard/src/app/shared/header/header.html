@@ -1,37 +1,6 @@
-<nav class="border-bottom py-2 yard-header d-flex align-items-center">
-    <div class="container d-flex w-full justify-content-between align-items-center">
-        <h5 class="yard-brand" routerLink="home">Product<span class="yard-txt">Yard</span></h5>
-        @if(router.url==='/products'){
-        <div class="hamburger hamburger d-md-none" (click)="toggleMenuOpen()">
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
-        }
-        @if(router.url!=='/products'){
-        <div class="d-flex gap-3 align-items-center text-center">
-            <a class="yard-header-links" routerLink="products">Shop</a>
-        </div>
-        }
-        @if(router.url==='/products'){
-        <div [class.active]="menuOpen" class="menu-items">
-            <div class="input-group product-search-input yard-txt d-flex align-items-center gap-2">
-                <input [value]="userSearch()" (input)="userSearch.set($event.target.value)" type="text"
-                    class="form-control header-heights header-search-input rounded" placeholder="Search Product"
-                    aria-label="Input group example" aria-describedby="btnGroupAddon">
-                <div routerLink="/product/checkout"
-                    class="cart-btn-box header-heights d-flex align-items-center justify-content-center px-2 text-center gap-2 rounded" [class.wiggle]="wiggleCart()">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="white"
-                        class="bi bi-cart-fill" viewBox="0 0 16 16">
-                        <path
-                            d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2" />
-                    </svg>
-                    @if(cardServ.cart().length!==0){
-                    {{cardServ.cart().length}}
-                    }
-                </div>
-            </div>
-        </div>
-        }
+<nav class="border-bottom py-2 yard-header d-flex align-items-center justify-content-center">
+    <div class="container d-flex w-100 justify-content-between align-items-center">
+        <h5 class="yard-brand class-pointer" routerLink="/home">Product<span class="yard-txt">Yard</span></h5>
+        <ng-content></ng-content>
     </div>
 </nav>

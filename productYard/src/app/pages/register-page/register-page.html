@@ -1,0 +1,103 @@
+<div class="grey-background vh-100 d-flex align-items-center">
+    <div class="container">
+        <form [formGroup]="registerForm" class="bg-white container checkout-radius p-5 auth-form-card"
+            (ngSubmit)="handleUserRegister()">
+            <div>
+                <h3>Product<span class="yard-txt">Yard</span></h3>
+            </div>
+            <div>
+                <p>Sign up Today</p>
+            </div>
+            <small [class.text-success]="registrationStatus()==='You have been successfully registered!'"
+                [class.text-danger]="registrationStatus()==='Something went wrong!'">
+                {{registrationStatus()}}
+            </small>
+            <div class="form-group mb-2">
+                <label for="user-username">Username</label>
+                <input type="text" class="form-control" id="user-username" aria-describedby="emailHelp"
+                    formControlName="username" placeholder="Enter your username" autocomplete="username">
+                @if (registerForm.get('username'); as usernameCtrl){
+                @if (usernameCtrl.hasError('required') && usernameCtrl.touched){
+                <small class="form-text text-danger">
+                    Username is required.
+                </small>
+                }
+                }
+            </div>
+            <div class="form-group mb-2">
+                <label for="user-email">Email address</label>
+                <input formControlName="email" type="email" class="form-control" id="user-email"
+                    aria-describedby="emailHelp" placeholder="Enter email" autocomplete="johndoe@gmail.com">
+                @if (registerForm.get('email'); as emailCtrl){
+                @if (emailCtrl?.hasError('required') && emailCtrl.touched){
+                <small class="form-text text-danger">
+                    Email is required.
+                </small>
+                } @else if (emailCtrl.hasError('email') && emailCtrl.touched){
+                <small class="form-text text-danger">
+                    Invalid email adddress.
+                </small>
+                }
+                }
+            </div>
+
+            <div class="form-group mb-2">
+                <label for="user-password">Password</label>
+                <input formControlName="password" type="password" class="form-control" id="user-password"
+                    placeholder="Password" autocomplete="new-password">
+
+                @if (registerForm.get('password'); as passwordCtrl) {
+                @if (passwordCtrl?.hasError('required') && passwordCtrl.touched) {
+                <small class="form-text text-danger">
+                    Password is required.
+                </small>
+                }
+                }
+
+            </div>
+            <div class="form-group mb-2">
+                <label for="user-confirmPassword">Confirm Password</label>
+                <input formControlName="confirmPassword" type="password" class="form-control" id="user-confirmPassword"
+                    placeholder="Password" autocomplete="new-password">
+                @if (registerForm.get('confirmPassword'); as confirmPasswordCtrl){
+                @if (confirmPasswordCtrl.hasError('required') && confirmPasswordCtrl.touched){
+                <small class="form-text text-danger">
+                    Please confirm your password.
+                </small>
+                }
+                @if (confirmPasswordCtrl?.hasError('PasswordMismatch') && confirmPasswordCtrl.touched){
+                <small class="form-text text-danger">
+                    Passwords do not match.
+                </small>
+                }
+                }
+            </div>
+
+            <div class="form-group mb-2">
+                <label>Select your role</label>
+                <select id="role" formControlName="role" class="form-select form-select-sm">
+                    <option value="" disabled>-- Choose an option --</option>
+                    @for(option of options; track option){
+                    <option [value]="option">
+                        {{option}}
+                    </option>
+                    }
+                </select>
+                @if (registerForm.get('role'); as roleCtrl){
+                @if (roleCtrl.hasError('required') && roleCtrl.touched){
+                <small class="form-text text-danger">
+                    Please define a role.
+                </small>
+                }
+                }
+            </div>
+
+            <button type="submit mb-3" class="btn checkout-btn blue-background">Submit</button>
+
+            <div>
+                <p>Already have an account? <span routerLink="/login" class="text-primary class-pointer"> Signin</span>
+                </p>
+            </div>
+        </form>
+    </div>
+</div>

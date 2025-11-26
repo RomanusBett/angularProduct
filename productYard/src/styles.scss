@@ -1,3 +1,24 @@
+@use 'bootstrap/scss/bootstrap';
+@use "sass:map";
+
+$breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+);
+
+@mixin media-breakpoint-down($name) {
+  @if map.has-key($breakpoints, $name) {
+    @media (max-width: map.get($breakpoints, $name)) {
+      @content;
+    }
+  } @else {
+    @warn "Breakpoint '#{$name}' not found in $breakpoints map.";
+  }
+}
+
 :root {
   --primary: #4051b5;
   --background-light: #f6f6f8;
@@ -7,8 +28,28 @@
   --gray-200: #e5e7eb;
   --header-height: 4rem;
 }
+
 body {
   font-family: 'Work Sans', sans-serif;
+}
+
+.home-big-container {
+  min-height: calc(100vh - var(--header-height));
+}
+
+.grey-background {
+  background-color: var(--border-bottom-light);
+}
+
+.toast-wrapper {
+  z-index: 3;
+  .toast-item {
+    animation: slide-in 0.3s ease-out, fade-out 0.4s ease-in 2.6s forwards;
+  }
+}
+
+.yard-txt {
+  color: var(--primary);
 }
 
 .checkout-mark-box {
@@ -23,13 +64,28 @@ body {
 .yard-card-input {
   border: 1px solid gray;
   min-width: 25rem;
+  @include media-breakpoint-down(md) {
+    min-width: fit-content;
+  }
+}
+
+.blue-background {
+  background-color: var(--primary);
 }
 
 .checkout-btn {
-  background-color: var(--primary);
   color: #fff;
-  cursor: pointer;
   height: fit-content;
+}
+
+.cart-btn-box {
+  color: #fff;
+  width: fit-content;
+  transition: transform 0.2s;
+}
+
+.class-pointer {
+  cursor: pointer;
 }
 
 .checkout-btn:hover {
@@ -43,38 +99,133 @@ body {
   background: rgba(0, 0, 0, 0.7);
   display: flex;
   align-items: center;
-  z-index: 1050;
+  z-index: 2;
   justify-content: center;
 }
 
-.home-big-container{
-    background-image: url('https://cdn.pixabay.com/photo/2018/07/30/12/00/iphone-3572477_960_720.jpg');
-    min-height: calc(100vh - var(--header-height));
-}
-
-.shop-discount-container{
-  background-image: url('https://assets.boots.com/content/dam/boots/seasonal-campaigns/sale/sale-2024---2025/SALE_Hero_2024.dam.ts%3D1733145614909.jpg');
+.shop-discount-container {
   min-height: 5rem;
   color: #e6e5ec;
 }
 
-.img-containers{
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
-    position: relative;
-    z-index: 1;
+.img-containers {
+  background-image: url('assets/home-image.jpeg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  position: relative;
+  z-index: 0;
 }
-.img-containers::after{
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.5);
-    z-index: -9;
+.img-containers::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: -1;
 }
 
-@media (max-width: 768px) {
-  .yard-card-input {
-    min-width: fit-content;
+.auth-form-card {
+  width: 50%;
+  @include media-breakpoint-down(lg) {
+    width: 100%;
   }
 }
+
+.yard-header {
+  height: var(--header-height);
+  background-color: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+.product-search-input {
+  max-width: 40%;
+  @include media-breakpoint-down(md) {
+    max-width: 85%;
+    margin-bottom: 1rem;
+  }
+}
+
+.yard-header-links:hover {
+  color: var(--primary);
+}
+
+@keyframes wiggle {
+  0%,
+  100% {
+    transform: rotate(0deg);
+    background-color: var(--primary);
+  }
+  25% {
+    transform: rotate(-10deg);
+    background-color: #0057fa;
+  }
+  50% {
+    transform: rotate(0deg);
+  }
+  75% {
+    transform: rotate(5deg);
+    background-color: #0057fa;
+  }
+}
+
+.cart-btn-box.wiggle {
+  animation: wiggle 0.5s ease-in-out 0s 1;
+}
+
+.header-heights {
+  height: 2rem;
+}
+.header-search-input {
+  border: 1px solid var(--primary);
+  background-color: rgb(241, 241, 241);
+}
+
+.hamburger {
+  flex-direction: column;
+  cursor: pointer;
+  display: none;
+  @include media-breakpoint-down(md) {
+    display: flex;
+  }
+}
+
+.menu-items {
+  width: 70%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  @include media-breakpoint-down(md) {
+    position: absolute;
+    top: 4rem;
+    left: -100%;
+    flex-direction: column;
+    width: 100%;
+    background: #fff;
+    padding: 1rem 0;
+    transition: 0.3s;
+    z-index: 1;
+
+    .menu-items.active {
+    left: 0;
+  }
+  }
+}
+
+.hamburger span {
+  height: 3px;
+  width: 25px;
+  background: #000;
+  margin: 4px 0;
+  transition: 0.4s;
+}
+
+.yard-brand {
+  font-weight: bold;
+}
+
+@include media-breakpoint-down(md) {
+    .menu-items.active {
+    left: 0;
+  }
+  }

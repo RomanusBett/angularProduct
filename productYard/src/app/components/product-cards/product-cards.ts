@@ -1,12 +1,12 @@
-import { CardService } from './../../core/card-service';
-import { ProductService } from '../../core/product-service';
-import { Component, inject, computed } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { input } from '@angular/core';
 import { YardCard } from '../yard-card/yard-card';
 import { RoundButton } from '../round-button/round-button';
-import { YardInput } from '../yard-input/yard-input';
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
-import { ToastService } from '../../core/toast-service';
+import { ToastService } from '../../core/services/toast-service';
+import { ProductService } from '../../core/services/product-service';
+import { CardService } from '../../core/services/card-service';
+import { EditIcon } from '../svg-icons/edit-icon/edit-icon';
 
 export interface ProductItems {
   id: number;
@@ -14,21 +14,31 @@ export interface ProductItems {
   price: number;
   description: string;
   image: string;
-  discounted?: boolean;
+  stockedOut?: boolean;
   quantity?: number;
 }
+
+export enum USER_ROLES{
+    Admin = 'admin',
+    User = 'user'
+  } 
+
 @Component({
   selector: 'app-product-cards',
-  imports: [YardCard, RoundButton, YardInput, ReactiveFormsModule],
+  imports: [YardCard, RoundButton, ReactiveFormsModule, EditIcon],
   templateUrl: './product-cards.html',
   styleUrl: './product-cards.scss',
 })
 export class ProductCards {
   cartServ = inject(CardService);
   prodServ = inject(ProductService);
-  productItems = input<ProductItems>();
   toastServ = inject(ToastService);
-  showEditModal = false;
+
+  productItems = input<ProductItems>();
+  role = input<string>()
+
+  showEditModal = false;  
+  userRoles = USER_ROLES;
 
   editProductForm = new FormGroup({
     name: new FormControl('',{nonNullable:true, validators: [Validators.required]}),
