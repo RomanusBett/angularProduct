@@ -1,3 +1,24 @@
+@use 'bootstrap/scss/bootstrap';
+@use "sass:map";
+
+$breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+);
+
+@mixin media-breakpoint-down($name) {
+  @if map.has-key($breakpoints, $name) {
+    @media (max-width: map.get($breakpoints, $name)) {
+      @content;
+    }
+  } @else {
+    @warn "Breakpoint '#{$name}' not found in $breakpoints map.";
+  }
+}
+
 :root {
   --primary: #4051b5;
   --background-light: #f6f6f8;
@@ -7,6 +28,7 @@
   --gray-200: #e5e7eb;
   --header-height: 4rem;
 }
+
 body {
   font-family: 'Work Sans', sans-serif;
 }
@@ -22,7 +44,6 @@ body {
 .toast-wrapper {
   z-index: 3;
   .toast-item {
-    min-width: 250px;
     animation: slide-in 0.3s ease-out, fade-out 0.4s ease-in 2.6s forwards;
   }
 }
@@ -43,12 +64,24 @@ body {
 .yard-card-input {
   border: 1px solid gray;
   min-width: 25rem;
+  @include media-breakpoint-down(md) {
+    min-width: fit-content;
+  }
+}
+
+.blue-background {
+  background-color: var(--primary);
 }
 
 .checkout-btn {
-  background-color: var(--primary);
   color: #fff;
   height: fit-content;
+}
+
+.cart-btn-box {
+  color: #fff;
+  width: fit-content;
+  transition: transform 0.2s;
 }
 
 .class-pointer {
@@ -76,7 +109,7 @@ body {
 }
 
 .img-containers {
-  background-image: url('./app/assets/home-image.jpeg');
+  background-image: url('assets/home-image.jpeg');
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
@@ -93,18 +126,13 @@ body {
 
 .auth-form-card {
   width: 50%;
-}
-
-.product-page-box {
-  background-color: var(--border-bottom-light);
-  min-height: calc(100vh - var(--header-height));
-  border-top: 1px solid rgb(202, 202, 202);
-}
-.our-products {
-  font-weight: bolder;
+  @include media-breakpoint-down(lg) {
+    width: 100%;
+  }
 }
 
 .yard-header {
+  height: var(--header-height);
   background-color: #fff;
   position: sticky;
   top: 0;
@@ -112,14 +140,12 @@ body {
 }
 .product-search-input {
   max-width: 40%;
-  font-weight: 600;
+  @include media-breakpoint-down(md) {
+    max-width: 85%;
+    margin-bottom: 1rem;
+  }
 }
 
-.yard-header-links {
-  text-decoration: none;
-  color: #000;
-  font-weight: 500;
-}
 .yard-header-links:hover {
   color: var(--primary);
 }
@@ -143,14 +169,6 @@ body {
   }
 }
 
-.cart-btn-box {
-  background-color: var(--primary);
-  color: #fff;
-  width: fit-content;
-  margin-right: 1rem;
-  transition: transform 0.2s;
-}
-
 .cart-btn-box.wiggle {
   animation: wiggle 0.5s ease-in-out 0s 1;
 }
@@ -167,6 +185,9 @@ body {
   flex-direction: column;
   cursor: pointer;
   display: none;
+  @include media-breakpoint-down(md) {
+    display: flex;
+  }
 }
 
 .menu-items {
@@ -174,6 +195,21 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  @include media-breakpoint-down(md) {
+    position: absolute;
+    top: 4rem;
+    left: -100%;
+    flex-direction: column;
+    width: 100%;
+    background: #fff;
+    padding: 1rem 0;
+    transition: 0.3s;
+    z-index: 1;
+
+    .menu-items.active {
+    left: 0;
+  }
+  }
 }
 
 .hamburger span {
@@ -188,42 +224,8 @@ body {
   font-weight: bold;
 }
 
-// mixins in angular
-
-@media (max-width: 998px) {
-  .auth-form-card {
-    width: 100%;
-  }
-}
-
-@media (max-width: 768px) {
-  .yard-card-input {
-    min-width: fit-content;
-  }
-
-  .hamburger {
-    display: flex;
-  }
-
-  .menu-items {
-    position: absolute;
-    top: 60px;
-    left: -100%;
-    flex-direction: column;
-    width: 100%;
-    background: #fff;
-    padding: 1rem 0;
-    transition: 0.3s;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    z-index: 1;
-    border-top: 1px solid gray;
-  }
-  .product-search-input {
-    max-width: 85%;
-    margin-bottom: 1rem;
-  }
-
-  .menu-items.active {
+@include media-breakpoint-down(md) {
+    .menu-items.active {
     left: 0;
   }
-}
+  }

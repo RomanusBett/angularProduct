@@ -5,27 +5,23 @@ import { RoundButton } from '../../components/round-button/round-button';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ToastService } from '../../core/services/toast-service';
 import { CallService } from '../../core/services/call-service';
-import { Subscription, take } from 'rxjs';
+import { take } from 'rxjs';
 import { ProductService } from '../../core/services/product-service';
 import { Header } from '../../shared/header/header';
 import { Router } from '@angular/router';
 import { SessionService } from '../../core/services/session-service';
-
+import { LogoutIcon } from '../../components/svg-icons/logout-icon/logout-icon';
+import { USER_ROLES } from './../../components/product-cards/product-cards';
 
 @Component({
   selector: 'app-shop-page',
-  imports: [ProductCards, YardCard, RoundButton, ReactiveFormsModule, Header],
+  imports: [ProductCards, YardCard, RoundButton, ReactiveFormsModule, Header, LogoutIcon],
   templateUrl: './shop-page.html',
-  styleUrl: './shop-page.scss',
 })
 
-export class ShopPage implements OnInit, OnDestroy {
-  ngOnInit(): void {
-    this.fetchDummyJSON()
-  }
+export class ShopPage implements OnInit {
 
   public prodServ = inject(ProductService);
-  private dummyDataSubscription: Subscription | undefined;
   private callServ = inject(CallService);
   private toastServ = inject(ToastService);
   public sessionServ = inject(SessionService);
@@ -36,9 +32,14 @@ export class ShopPage implements OnInit, OnDestroy {
   isLoading = computed(() => this.prodServ.isLoading());
   filtered = computed(() => this.prodServ.filteredProducts());
 
-  errorMessage = "";
   dummies = signal<ProductItems[]>([]);
   showCreateModal: boolean = false;
+  errorMessage = "";
+  userRoles = USER_ROLES;
+
+  ngOnInit(): void {
+    this.fetchDummyJSON()
+  }
 
   createProductForm = new FormGroup({
     name: new FormControl('', { nonNullable: true, validators: [Validators.required] }),
@@ -48,7 +49,7 @@ export class ShopPage implements OnInit, OnDestroy {
   });
 
   fetchDummyJSON() {
-    this.dummyDataSubscription = this.callServ.fetchDummy().pipe(take(1)).subscribe({
+    this.callServ.fetchDummy().pipe(take(1)).subscribe({
       next: (data) => {
         const productsArray = data.products;
         this.dummies.set(productsArray.map((item: any) => ({
@@ -60,7 +61,7 @@ export class ShopPage implements OnInit, OnDestroy {
           stockedOut: true,
         })))
       },
-      error: (err) => console.error('Failed to fetch dummy data', err),
+      error: () => this.toastServ.showToast('Failed to Fetch sold out items'),
     });
   }
 
@@ -93,11 +94,5 @@ export class ShopPage implements OnInit, OnDestroy {
 
   closeCreateModal = () => {
     this.showCreateModal = false;
-  }
-
-  ngOnDestroy(): void {
-    if (this.dummyDataSubscription) {
-      this.dummyDataSubscription.unsubscribe()
-    }
   }
 } 

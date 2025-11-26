@@ -3,6 +3,7 @@ import { AuthService } from '../../core/services/auth-service';
 import { ReactiveFormsModule, FormControl, FormGroup, Validators, ValidationErrors, ValidatorFn, AbstractControl } from '@angular/forms';
 import { RouterLink, Router } from '@angular/router';
 import { timer, delay, tap, of } from 'rxjs';
+import { USER_ROLES } from '../../components/product-cards/product-cards';
 
 function passwordMatchValidator(): ValidatorFn {
   return (control: AbstractControl): ValidationErrors | null => {
@@ -32,11 +33,11 @@ function passwordMatchValidator(): ValidatorFn {
 export class RegisterPage {
   private authServ = inject(AuthService);
   private router = inject(Router);
-  options = ['admin', 'user'];
-
 
   registrationStatus = signal<string>('');
 
+  userRole = USER_ROLES;
+  options = [this.userRole.Admin, this.userRole.User];
   status: string = "";
 
   registerForm = new FormGroup({
@@ -56,7 +57,6 @@ export class RegisterPage {
 
   handleUserRegister() {
     if (this.registerForm.valid) {
-      console.log('hi');
       const credentials = this.registerForm.value;
 
       const { confirmPassword, role, ...others } = credentials;

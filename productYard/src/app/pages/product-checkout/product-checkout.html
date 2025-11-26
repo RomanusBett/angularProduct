@@ -1,18 +1,18 @@
 <app-header>
     <div class="d-flex gap-3 align-items-center text-center">
-        <a class="yard-header-links class-pointer" routerLink="/products">Shop</a>
+        <a class="text-decoration-none text-dark fw-normal class-pointer" routerLink="/products">Shop</a>
     </div>
 </app-header>
 <div class="home-big-container grey-background d-flex justify-content-center align-items-center">
-    <div class="container d-flex justify-content-center">
+    <div class="container d-flex justify-content-center py-5">
         <app-yard-card>
             <div class="card-body">
-                <div class="d-flex justify-content-between">
+                <div class="d-flex justify-content-between border-bottom">
                     @if(cartServ.cart().length !== 0){
                     <div class="d-flex align-items-center">
                         <div
                             class="container d-flex alert alert-success rounded-circle checkout-mark-box justify-content-center align-items-center">
-                            <p>✓</p>
+                            <p class="m-0">✓</p>
                         </div>
                         <div class="container">
                             <h3>Successfully added to cart</h3>
@@ -23,7 +23,7 @@
                     <div class="d-flex align-items-center">
                         <div
                             class="container d-flex alert alert-danger rounded-circle checkout-mark-box justify-content-center align-items-center">
-                            <p>!</p>
+                            <p class="m-0">!</p>
                         </div>
                         <div class="container">
                             <h3>No items in the cart</h3>
@@ -34,23 +34,21 @@
                 </div>
             </div>
             @if(cartServ.cart().length !== 0){
-            <div class="border-bottom border-top cart-product-items container py-3">
+            <div class="cart-product-items container py-3">
                 @for(c of itemsInCart(); track c.id){
-                <div class="d-flex justify-content-between flex-column flex-lg-row">
-                    <div class="d-flex gap-3 py-3">
+                <div class="d-flex justify-content-between flex-column flex-lg-row border-bottom gap-2">
+                    <div class="d-flex gap-3 py-2">
                         <div class="">
-                            <img class="product-checkout-img rounded" [src]="c.image" [alt]="c.name">
+                            <img class="product-checkout-img object-fit-cover rounded" [src]="c.image" [alt]="c.name">
                         </div>
-                        <div class="">
-                            <div class="product-typography">
-                                <h5 class="product-child-el">{{c.name}}</h5>
-                                <p class="product-child-el product-checkout-price">Ksh {{c.price}}</p>
-                                <p class="product-child-el text-secondary">{{c.description}}</p>
-                            </div>
+                        <div>
+                            <h5 class="fw-bold fs-6 m-0">{{c.name}}</h5>
+                            <p class="product-checkout-price fw-bold fs-sm m-0">Ksh {{c.price}}</p>
+                            <p class="text-secondary fs-6 m-0 w-75">{{c.description}}</p>
                         </div>
 
                     </div>
-                    <div class="d-flex gap-1">
+                    <div class="d-flex gap-1 align-items-center">
                         <app-round-button (buttonClicked)="decreaseItemQuantity(c.id)" roundBtnText='-'
                             alertType="secondary"></app-round-button>
                         <app-round-button [roundBtnText]='c.quantity!' alertType="light"></app-round-button>
@@ -63,10 +61,10 @@
 
             <div class="container border-bottom d-flex justify-content-between">
                 <p>Total</p>
-                <p>Ksh {{total().toFixed(2)}}</p>
+                <p class="fw-bold">Ksh {{total().toFixed(2)}}</p>
             </div>
             }
-            <button routerLink="/products" class="btn checkout-btn class-pointer checkout-radius mt-3">
+            <button routerLink="/products" class="btn checkout-btn blue-background class-pointer checkout-radius mt-3">
                 Continue shopping
             </button>
         </app-yard-card>

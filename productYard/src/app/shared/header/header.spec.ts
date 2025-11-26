@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideZonelessChangeDetection } from '@angular/core';
 import { Header } from './header';
 import { provideRouter } from '@angular/router';
-import { yardProducts } from '../../assets/data/products';
+import { yardProducts } from '../../../assets/data/products';
 import { ProductService } from '../../core/services/product-service';
 
 describe('Header', () => {

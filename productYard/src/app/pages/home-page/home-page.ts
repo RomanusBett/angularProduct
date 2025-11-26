@@ -5,7 +5,6 @@ import { Header } from '../../shared/header/header';
   selector: 'app-home-page',
   imports: [RouterLink, Header],
   templateUrl: './home-page.html',
-  styleUrl: './home-page.scss',
 })
 
 export class HomePage {}

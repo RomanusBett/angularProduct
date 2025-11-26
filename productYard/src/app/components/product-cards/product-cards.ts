@@ -6,6 +6,7 @@ import {FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/
 import { ToastService } from '../../core/services/toast-service';
 import { ProductService } from '../../core/services/product-service';
 import { CardService } from '../../core/services/card-service';
+import { EditIcon } from '../svg-icons/edit-icon/edit-icon';
 
 export interface ProductItems {
   id: number;
@@ -16,19 +17,28 @@ export interface ProductItems {
   stockedOut?: boolean;
   quantity?: number;
 }
+
+export enum USER_ROLES{
+    Admin = 'admin',
+    User = 'user'
+  } 
+
 @Component({
   selector: 'app-product-cards',
-  imports: [YardCard, RoundButton, ReactiveFormsModule],
+  imports: [YardCard, RoundButton, ReactiveFormsModule, EditIcon],
   templateUrl: './product-cards.html',
   styleUrl: './product-cards.scss',
 })
 export class ProductCards {
   cartServ = inject(CardService);
   prodServ = inject(ProductService);
-  productItems = input<ProductItems>();
   toastServ = inject(ToastService);
+
+  productItems = input<ProductItems>();
   role = input<string>()
-  showEditModal = false;
+
+  showEditModal = false;  
+  userRoles = USER_ROLES;
 
   editProductForm = new FormGroup({
     name: new FormControl('',{nonNullable:true, validators: [Validators.required]}),

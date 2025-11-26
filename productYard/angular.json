@@ -20,11 +20,13 @@
 						"browser": "src/main.ts",
 						"tsConfig": "tsconfig.app.json",
 						"assets": [
-							{
-								"glob": "**/*",
-								"input": "public"
-							}
+							"src/assets"
 						],
+						"stylePreprocessorOptions": {
+							"includePaths": [
+								"node_modules"
+							]
+						},
 						"styles": [
 							"node_modules/bootstrap/dist/css/bootstrap.min.css",
 							"src/styles.scss"
