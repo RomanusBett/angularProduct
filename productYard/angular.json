@@ -22,11 +22,6 @@
 						"assets": [
 							"src/assets"
 						],
-						"stylePreprocessorOptions": {
-							"includePaths": [
-								"node_modules"
-							]
-						},
 						"styles": [
 							"node_modules/bootstrap/dist/css/bootstrap.min.css",
 							"src/styles.scss"
