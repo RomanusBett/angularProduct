@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { provideZonelessChangeDetection } from '@angular/core';
 import { EditIcon } from './edit-icon';
 
 describe('EditIcon', () => {
@@ -8,9 +8,9 @@ describe('EditIcon', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [EditIcon]
-    })
-    .compileComponents();
+      imports: [EditIcon],
+      providers: [provideZonelessChangeDetection()]
+    }).compileComponents();
 
     fixture = TestBed.createComponent(EditIcon);
     component = fixture.componentInstance;

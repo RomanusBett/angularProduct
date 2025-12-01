@@ -11,7 +11,7 @@
                 class="form-control header-heights header-search-input rounded" placeholder="Search Product"
                 aria-label="Input group example" aria-describedby="btnGroupAddon">
             <div routerLink="/product/checkout"
-                class="cart-btn-box blue-background class-pointer header-heights d-flex align-items-center justify-content-center px-2 text-center gap-2 rounded mx-1"
+                class="cart-btn-box blue-background class-pointer header-heights d-flex align-items-center justify-content-center px-2 text-center gap-2 rounded mx-1 fw-bold"
                 [class.wiggle]="wiggleCart()">
                 <app-cart-icon></app-cart-icon>
                 @if(cardServ.cart().length!==0){
@@ -28,13 +28,13 @@
 <div class="border-top home-big-container grey-background">
     <div class="container py-4 position-relative">
         <div class="toast-wrapper position-fixed bottom-0 end-0 p-3">
-            @for (toast of toasts(); track toast.id) {
+            @for (toast of toastServ.toasts(); track toast.id) {
             <div class="alert toast-item alert-{{toast.type}} mb-2">
                 {{ toast.message }}
             </div>
             }
         </div>
-        <div class="mb-3 img-containers shop-discount-container d-flex align-items-center justify-content-center">
+        <div class="mb-3 img-containers background-wrappers shop-discount-container d-flex align-items-center justify-content-center">
             <div class="d-flex justify-content-center mb-3">
                 <h4 class="fw-bold fs-1 m-0">Available Products</h4>
             </div>

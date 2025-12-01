@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { provideZonelessChangeDetection } from '@angular/core';
 import { LogoutIcon } from './logout-icon';
 
 describe('LogoutIcon', () => {
@@ -8,9 +8,9 @@ describe('LogoutIcon', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [LogoutIcon]
-    })
-    .compileComponents();
+      imports: [LogoutIcon],
+      providers: [provideZonelessChangeDetection()]
+    }).compileComponents();
 
     fixture = TestBed.createComponent(LogoutIcon);
     component = fixture.componentInstance;

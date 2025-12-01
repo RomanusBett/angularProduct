@@ -7,10 +7,10 @@
     <button (click)="logoutUser()" class="btn btn-light px-2 rounded"><app-logout-icon></app-logout-icon></button>
 </app-header>
 
-<div class="home-big-container border-top">
+<div class="home-big-container grey-background border-top">
     <div class="container py-4 position-relative">
         <div class="toast-wrapper position-fixed bottom-0 end-0 p-3">
-            @for (toast of toasts(); track toast.id) {
+            @for (toast of toastServ.toasts(); track toast.id) {
             <div class="alert toast-item alert-{{toast.type}} mb-2">
                 {{ toast.message }}
             </div>
@@ -22,11 +22,13 @@
                 <h4 class="fw-bold">Add a new item</h4>
                 <p>Create a new item of your choice to our list of existing products</p>
             </div>
-            <button (click)="toggleCreateModal()" class="btn checkout-btn blue-background class-pointer checkout-radius">
+            <button (click)="toggleCreateModal()"
+                class="btn checkout-btn blue-background class-pointer checkout-radius">
                 Add Item
             </button>
         </div>
-        <div class="mb-3 img-containers shop-discount-container d-flex align-items-center justify-content-center">
+        <div
+            class="mb-3 img-containers background-wrappers shop-discount-container d-flex align-items-center justify-content-center">
             <div class="d-flex justify-content-center mb-3">
                 <h4 class="fw-bold fs-1 m-0">Available Products</h4>
             </div>
@@ -70,10 +72,11 @@
         <div class="modal-backdrop-wrapper" (click)="closeCreateModal()">
             <app-yard-card (click)="$event.stopPropagation()">
                 <div class="container border-bottom d-flex justify-content-between align-items-center">
-                    <h5>Edit product</h5>
+                    <h5>Create a new product</h5>
                     <app-round-button (click)="closeCreateModal()" roundBtnText="X"
                         alertType="secondary"></app-round-button>
                 </div>
+                <p class="text-danger">{{createProductStatus}}</p>
                 <div class="d-flex flex-column flex-md-row gap-4 mt-3">
                     <div>
                         <form [formGroup]="createProductForm">
@@ -83,22 +86,50 @@
                                 <input type="text" class="form-control-sm rounded yard-card-input" id="newProductName"
                                     formControlName="name" placeholder="Product name">
                             </div>
+                            @if (createProductForm.get('name'); as createNameCtrl){
+                            @if(createNameCtrl.hasError('required') && createNameCtrl.touched){
+                            <small class="form-text text-danger">
+                                Name of Product is required.
+                            </small>
+                            }
+                            }
                             <div class="form-group d-flex flex-column">
                                 <label class="col-form-label col-form-label-sm" for="newProductPrice">Price</label>
                                 <input type="number" class="form-control-sm rounded yard-card-input"
                                     id="newProductPrice" formControlName="price" placeholder="0">
                             </div>
+                            @if (createProductForm.get('price'); as createPriceCtrl){
+                            @if(createPriceCtrl.hasError('required') && createPriceCtrl.touched){
+                            <small class="form-text text-danger">
+                                Price of Product is required.
+                            </small>
+                            }
+                            }
                             <div class="form-group d-flex flex-column">
                                 <label class="col-form-label col-form-label-sm" for="newProductImage">Image url</label>
                                 <input type="text" class="form-control-sm rounded yard-card-input" id="newProductImage"
                                     formControlName="image" placeholder="image url">
                             </div>
+                            @if (createProductForm.get('image'); as createImageCtrl){
+                            @if(createImageCtrl.hasError('required') && createImageCtrl.touched){
+                            <small class="form-text text-danger">
+                                Image of product is required.
+                            </small>
+                            }
+                            }
                             <div class="form-group">
                                 <label for="productDescription" class="col-form-label col-form-label-sm">product
                                     description</label>
                                 <textarea formControlName="description" class="form-control"
                                     id="newProductDescription yard-card-input" rows="4"></textarea>
                             </div>
+                            @if (createProductForm.get('description'); as createDescriptionCtrl){
+                            @if(createDescriptionCtrl.hasError('required') && createDescriptionCtrl.touched){
+                            <small class="form-text text-danger">
+                                Description of product is required.
+                            </small>
+                            }
+                            }
                         </form>
                     </div>
                 </div>

@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { provideZonelessChangeDetection } from '@angular/core';
 import { CartIcon } from './cart-icon';
 
 describe('CartIcon', () => {
@@ -8,9 +8,10 @@ describe('CartIcon', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [CartIcon]
+      imports: [CartIcon],
+      providers: [provideZonelessChangeDetection()]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(CartIcon);
     component = fixture.componentInstance;

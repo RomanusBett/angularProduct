@@ -26,7 +26,6 @@ export class CustomerPage {
 
   userSearch: string = "";
   wiggleCart = signal(false);
-  toasts = computed(() => this.toastServ.toasts())
   products = computed(() => this.prodServ.allProducts());
   isLoading = computed(() => this.prodServ.isLoading());
   filtered = computed(() => this.prodServ.filteredProducts());

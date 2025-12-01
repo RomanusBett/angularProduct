@@ -1,9 +1,9 @@
-import { ReactiveFormsModule } from '@angular/forms';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideZonelessChangeDetection } from '@angular/core';
 import { ShopPage } from './shop-page';
 import { provideHttpClient } from '@angular/common/http';
-
+import { routes } from '../../app.routes';
+import { provideRouter } from '@angular/router';
 
 describe('ShopPage', () => {
   let component: ShopPage;
@@ -12,9 +12,8 @@ describe('ShopPage', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ShopPage, ReactiveFormsModule],
-      providers: [provideZonelessChangeDetection(), provideHttpClient()
-      ]
+      imports: [ShopPage],
+      providers: [provideZonelessChangeDetection(), provideHttpClient(), provideRouter(routes)]
     }).compileComponents();
 
     fixture = TestBed.createComponent(ShopPage);
