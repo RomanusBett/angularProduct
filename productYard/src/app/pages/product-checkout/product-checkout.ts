@@ -3,7 +3,6 @@ import { RoundButton } from '../../components/round-button/round-button';
 import { YardCard } from '../../components/yard-card/yard-card';
 import { RouterLink } from '@angular/router';
 import { CardService } from '../../core/services/card-service';
-import { ProductService } from '../../core/services/product-service';
 import { Header } from '../../shared/header/header';
 
 @Component({
@@ -14,7 +13,6 @@ import { Header } from '../../shared/header/header';
 })
 
 export class ProductCheckout {
-  private prodServ = inject(ProductService);
   cartServ = inject(CardService);
   itemsInCart = computed(()=>this.cartServ.cart());
 

@@ -1,4 +1,4 @@
-<div data [id]="productItems()?.id" class="card shadow">
+<div data [id]="productItems()?.id" class="card shadow h-100">
     <div class="product-image-container">
         <img [src]="productItems()?.image" class="card-img-top yard-product-image object-fit-cover" [alt]="productItems()?.name">
         @if (role() === userRoles.Admin){
@@ -11,14 +11,14 @@
     </div>
     <div class="card-body">
         <p class="card-title fw-bold">{{productItems()?.name}}</p>
-        <p class="card-text text-muted">{{productItems()?.description}}</p>
+        <p class="card-text text-muted fs-6 m-0">{{productItems()?.description}}</p>
         <p class="product-price fw-bold"><span>Ksh</span> {{productItems()?.price}}</p>
         @if (role() === userRoles.User){
         @if (cartServ.productInCart(productItems()?.id!)){
         <button (click)="removeFromCart(productItems()?.id!)" class="btn checkout-btn blue-background class-pointer checkout-radius">Remove From
             cart</button>
         } @else {
-        <button (click)="addToCart(productItems()?.id!)" class="btn checkout-btn blue-background class-pointer  checkout-radius">Add To Cart</button>
+        <button (click)="addToCart(productItems()?.id!)" class="btn checkout-btn blue-background class-pointer d-flex checkout-radius">Add To Cart</button>
         }
         }
     </div>
@@ -69,5 +69,4 @@
         </div>
     </app-yard-card>
 </div>
-
 }
