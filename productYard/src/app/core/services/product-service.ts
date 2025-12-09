@@ -1,12 +1,16 @@
-import { computed, Injectable } from '@angular/core';
+import { computed, Injectable, DestroyRef, inject } from '@angular/core';
 import { signal } from '@angular/core';
 import { yardProducts } from '../../../assets/data/products';
 import { ProductItems } from '../../components/product-cards/product-cards';
+import { timer, tap } from 'rxjs';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ProductService {
+  private destroyRef = inject(DestroyRef);
+
   allProducts = signal<ProductItems[]>([]);
   isLoading = signal(true);
   searchTerm = signal('');
@@ -27,10 +31,12 @@ export class ProductService {
   }
 
   loadProducts = ()=>{
-    setTimeout(() => {
+    timer(2000).pipe(
+      takeUntilDestroyed(this.destroyRef),
+      tap(()=>{
       this.allProducts.set(yardProducts);
-      this.isLoading.set(false);      
-    }, 2000);
+      this.isLoading.set(false);
+    })).subscribe();
   }
 
   addProduct(product: ProductItems){

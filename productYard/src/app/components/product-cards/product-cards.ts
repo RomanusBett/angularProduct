@@ -21,7 +21,8 @@ export interface ProductItems {
 
 export enum USER_ROLES{
     Admin = 'admin',
-    User = 'user'
+    User = 'user', 
+    role_admin = "ROLE_ADMIN"
   } 
 
 @Component({

@@ -70,9 +70,7 @@ export class RegisterPage {
         next: () => {
           this.isLoading.set(false);
           this.toastServ.showToast(successRegistration, success)
-          of(null).pipe(
-            tap(()=>this.router.navigate(['/login']))
-          ).subscribe()
+          this.router.navigate(['/login'])
         },
         error: () => {
           this.isLoading.set(false)
