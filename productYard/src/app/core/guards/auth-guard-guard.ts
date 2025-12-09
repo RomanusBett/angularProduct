@@ -37,5 +37,4 @@ export const adminRoleGuard: CanActivateFn = (route, state) => {
     router.navigate(['/products'])
     return false;
   }
-  
 };

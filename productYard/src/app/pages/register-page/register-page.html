@@ -1,17 +1,20 @@
 <div class="grey-background vh-100 d-flex align-items-center">
     <div class="container">
+        <div class="toast-wrapper position-fixed top-0 end-0 p-3">
+            @for (toast of toastServ.toasts(); track toast.id) {
+            <div class="alert toast-item alert-{{toast.type}} mb-2">
+                {{ toast.message }}
+            </div>
+            }
+        </div>
         <form [formGroup]="registerForm" class="bg-white container checkout-radius p-5 auth-form-card"
             (ngSubmit)="handleUserRegister()">
             <div>
-                <h3>Product<span class="yard-txt">Yard</span></h3>
+                <h3 class="fw-bold m-0">Product<span class="yard-txt">Yard</span></h3>
             </div>
             <div>
-                <p>Sign up Today</p>
+                <p class="fw-bold text-muted">Sign up Today</p>
             </div>
-            <small [class.text-success]="registrationStatus()==='You have been successfully registered!'"
-                [class.text-danger]="registrationStatus()==='Something went wrong!'">
-                {{registrationStatus()}}
-            </small>
             <div class="form-group mb-2">
                 <label for="user-username">Username</label>
                 <input type="text" class="form-control" id="user-username" aria-describedby="emailHelp"
@@ -91,9 +94,7 @@
                 }
                 }
             </div>
-
-            <button type="submit mb-3" class="btn checkout-btn blue-background">Submit</button>
-
+            <button type="submit" class="btn checkout-btn blue-background my-2">Submit</button>
             <div>
                 <p>Already have an account? <span routerLink="/login" class="text-primary class-pointer"> Signin</span>
                 </p>

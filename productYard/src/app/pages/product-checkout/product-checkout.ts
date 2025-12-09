@@ -3,8 +3,9 @@ import { RoundButton } from '../../components/round-button/round-button';
 import { YardCard } from '../../components/yard-card/yard-card';
 import { RouterLink } from '@angular/router';
 import { CardService } from '../../core/services/card-service';
-import { ProductService } from '../../core/services/product-service';
 import { Header } from '../../shared/header/header';
+import { from, reduce } from 'rxjs';
+
 
 @Component({
   selector: 'app-product-checkout',
@@ -14,9 +15,9 @@ import { Header } from '../../shared/header/header';
 })
 
 export class ProductCheckout {
-  private prodServ = inject(ProductService);
   cartServ = inject(CardService);
   itemsInCart = computed(()=>this.cartServ.cart());
+  addTotal = (x:number, y:number) => x + y;
 
   total = computed(()=>this.itemsInCart().reduce((acc, item)=> (acc + (item.price * item.quantity!)), 0));
 

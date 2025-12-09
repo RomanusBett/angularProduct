@@ -21,14 +21,6 @@ describe('App', () => {
     expect(app).toBeTruthy();
   });
 
-  it('should render the header component', () => {
-    const fixture = TestBed.createComponent(App);
-    fixture.detectChanges();
-    const compiled = fixture.nativeElement as HTMLElement;
-    const header = compiled.querySelector('app-header');
-    expect(header).toBeTruthy()
-  });
-
   it('should have the /home route mapped to the HomePage', () => {
     const homeRoutes = routes.find(r => r.path === 'home');
     expect(homeRoutes?.component).toBe(HomePage);

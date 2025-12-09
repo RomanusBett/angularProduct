@@ -1,14 +1,20 @@
 <div class="grey-background vh-100 d-flex align-items-center">
     <div class="container">
+        <div class="toast-wrapper position-fixed top-0 end-0 p-3">
+            @for (toast of toastServ.toasts(); track toast.id) {
+            <div class="alert toast-item alert-{{toast.type}} mb-2">
+                {{ toast.message }}
+            </div>
+            }
+        </div>
         <form [formGroup]="loginForm" class="bg-white container checkout-radius p-5 auth-form-card"
             (ngSubmit)="handleUserLogin()">
             <div>
-                <h3>Product<span class="yard-txt">Yard</span></h3>
+                <h3 class="fw-bold m-0">Product<span class="yard-txt">Yard</span></h3>
             </div>
             <div>
-                <p>Sign in</p>
+                <p class="text-muted fw-bold">Sign in</p>
             </div>
-            <small class="form text text-danger">{{errorMessage()}}</small>
             <div class="form-group mb-2">
                 <label for="user-username">Username</label>
                 <input type="text" class="form-control" id="user-username" aria-describedby="emailHelp"
@@ -33,11 +39,21 @@
                 }
                 }
             </div>
-            <button type="submit mb-3" class="btn checkout-btn blue-background">Submit</button>
+            <button type="submit" class="btn checkout-btn blue-background my-2">
+                @if (isLoading()){
+                <span class="d-flex align-items-center justify-content-center">
+                    <span class="spinner-border spinner-border-sm" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </span>
+                    <span class="ms-2">Loading</span>
+                </span>
+                } @else {
+                Submit
+                }
+            </button>
             <div>
                 <p>Don't have an account? <span routerLink="/register" class="text-primary class-pointer"> Signup</span>
                 </p>
-
             </div>
         </form>
     </div>

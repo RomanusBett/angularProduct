@@ -113,15 +113,19 @@ body {
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
+}
+
+.background-wrappers {
   position: relative;
   z-index: 0;
 }
-.img-containers::after {
+
+.background-wrappers::after{
   content: '';
   position: absolute;
   inset: 0;
   background: rgba(0, 0, 0, 0.5);
-  z-index: -1;
+  z-index: -1; 
 }
 
 .auth-form-card {
@@ -228,4 +232,4 @@ body {
     .menu-items.active {
     left: 0;
   }
-  }
+}

@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 import { SessionService } from '../../core/services/session-service';
 import { LogoutIcon } from '../../components/svg-icons/logout-icon/logout-icon';
 import { USER_ROLES } from './../../components/product-cards/product-cards';
+import { danger, failedToFetchDummy, productSuccessfullyCreated, success, InvalidFormMessage } from '../../../assets/statusMessages/yardStatus';
 
 @Component({
   selector: 'app-shop-page',
@@ -20,14 +21,12 @@ import { USER_ROLES } from './../../components/product-cards/product-cards';
 })
 
 export class ShopPage implements OnInit {
-
   public prodServ = inject(ProductService);
   private callServ = inject(CallService);
-  private toastServ = inject(ToastService);
+  public toastServ = inject(ToastService);
   public sessionServ = inject(SessionService);
   public router = inject(Router);
 
-  toasts = computed(() => this.toastServ.toasts())
   products = computed(() => this.prodServ.allProducts());
   isLoading = computed(() => this.prodServ.isLoading());
   filtered = computed(() => this.prodServ.filteredProducts());
@@ -36,6 +35,7 @@ export class ShopPage implements OnInit {
   showCreateModal: boolean = false;
   errorMessage = "";
   userRoles = USER_ROLES;
+  createProductStatus:string = "";
 
   ngOnInit(): void {
     this.fetchDummyJSON()
@@ -61,7 +61,7 @@ export class ShopPage implements OnInit {
           stockedOut: true,
         })))
       },
-      error: () => this.toastServ.showToast('Failed to Fetch sold out items'),
+      error: () => this.toastServ.showToast(failedToFetchDummy, danger),
     });
   }
 
@@ -84,7 +84,10 @@ export class ShopPage implements OnInit {
       this.prodServ.addProduct(newProduct);
       this.createProductForm.reset();
       this.closeCreateModal();
-      this.toastServ.showToast('product successfully created', 'success');
+      this.toastServ.showToast(productSuccessfullyCreated, success);
+    } else {
+
+      this.createProductStatus = InvalidFormMessage;
     }
   }
 

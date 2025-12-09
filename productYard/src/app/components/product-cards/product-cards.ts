@@ -7,6 +7,7 @@ import { ToastService } from '../../core/services/toast-service';
 import { ProductService } from '../../core/services/product-service';
 import { CardService } from '../../core/services/card-service';
 import { EditIcon } from '../svg-icons/edit-icon/edit-icon';
+import { itemEdited, itemAdded, itemRemoved, itemDeleted, success, danger } from '../../../assets/statusMessages/yardStatus';
 
 export interface ProductItems {
   id: number;
@@ -20,7 +21,8 @@ export interface ProductItems {
 
 export enum USER_ROLES{
     Admin = 'admin',
-    User = 'user'
+    User = 'user', 
+    role_admin = "ROLE_ADMIN"
   } 
 
 @Component({
@@ -49,12 +51,12 @@ export class ProductCards {
 
   addToCart(productId:number){
     this.cartServ.addToCard(productId);
-    this.toastServ.showToast('item added to cart', 'success');
+    this.toastServ.showToast(itemAdded, success);
   }
 
   removeFromCart(productId:number){
     this.cartServ.removeFromCart(productId);
-    this.toastServ.showToast('item removed from cart', 'danger');
+    this.toastServ.showToast(itemRemoved, danger);
   }
 
   toggleEditModal=(product?: any)=>{
@@ -76,7 +78,7 @@ export class ProductCards {
   removeFromList(productId:number){    
     this.prodServ.removeItemFromList(productId);
     this.closeEditModal();
-    this.toastServ.showToast('item has been deleted', 'danger');
+    this.toastServ.showToast(itemDeleted, danger);
   }
 
   editProduct(productId:number){
@@ -91,6 +93,6 @@ export class ProductCards {
     } 
     this.prodServ.editProductDetails(updatedProduct);
     this.closeEditModal();
-    this.toastServ.showToast('item edited successfuly', 'success');
+    this.toastServ.showToast(itemEdited, success);
   }
 }
